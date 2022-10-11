@@ -7,7 +7,14 @@
     </head>
     <body>
         <div class="container">
-            <p>There goes my hero</p>
+            <form id="mainCalc">
+                <input
+                    type="text"
+                    id="mainCalcInput"
+                    onkeypress="return myKeyPress(event)"
+                />
+            </form>
         </div>
+        <script src="main.js"></script>
     </body>
 </html>
