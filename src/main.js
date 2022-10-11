@@ -6,11 +6,13 @@
 // );
 
 let main = document.getElementById("mainCalcInput");
+let mainCalc = document.getElementById("mainCalc");
 
-function myKeyPress(e){
-    if (e.key == "Enter") {
-        console.log(e);
-    }
-}
-
-// Form submit refreshing whole page
+function handleForm(event) {
+    event.preventDefault();
+    // console.log(mainCalc.querySelector('input[name="juan"]'));
+    const data = new FormData(event.target);
+    console.log([...data.entries()][0][1]);
+    mainCalc.reset();
+}  
+mainCalc.addEventListener('submit', handleForm);
