@@ -4,13 +4,25 @@ let mainCalc = document.getElementById("mainCalc");
 
 const letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 const otherKeys = [" "];
+let latestInput = "";
 
 document.onkeydown = function (event) {
+    main.focus();
     if (event.key == "r" && event.ctrlKey == true) {
         return;
     }
     else if (letters.includes(event.key)) {
         event.preventDefault();
+    }
+    else if (event.key == "ArrowUp") {
+        main.value = latestInput;
+        setTimeout(function () {
+            main.focus();
+            main.setSelectionRange(main.value.length, main.value.length);
+        }, 0);
+    }
+    else if (event.key == "ArrowDown") {
+        main.value = "";
     }
     else {
         console.log(event);
@@ -18,11 +30,14 @@ document.onkeydown = function (event) {
 }
 
 const result = document.getElementById("result");
+const computation = document.getElementById("computation");
 
 function handleForm(event) {
     event.preventDefault();
     const data = new FormData(event.target);
     let inputString = [...data.entries()][0][1];
+    latestInput = inputString;
+    computation.textContent = latestInput;
     result.textContent = evaluate(inputString);
     console.log(inputString);
     mainCalc.reset();
