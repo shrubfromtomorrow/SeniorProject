@@ -5,6 +5,7 @@
     <meta charset="UTF-8" />
     <title>Test</title>
     <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="../node_modules/mathquill/build/mathquill.css" />
 </head>
 
 <body>
@@ -16,8 +17,26 @@
             <div id="computation"></div>
             <div id="result"></div>
         </div>
+        <p>Solve <span id="problem">ax^2 + bx + c = 0</span>.</p>
+        <p><span id="answer"></span></p>
     </div>
-    <script src="main.js"></script>
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="../node_modules/mathquill/build/mathquill.js"></script>
+    <script>
+        var MQ = MathQuill.getInterface(2);
+        var problemSpan = document.getElementById('problem');
+        MQ.StaticMath(problemSpan);
+        var answerSpan = document.getElementById('answer');
+        var answerMathField = MQ.MathField(answerSpan, {
+            handlers: {
+                edit: function () {
+                    var enteredMath = answerMathField.latex(); // Get entered math in LaTeX format
+                    // checkAnswer(enteredMath);
+                }
+            }
+        });
+    </script>
+    <!-- <script src="main.js"></script> -->
 </body>
 
 </html>

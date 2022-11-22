@@ -7,7 +7,7 @@ const otherKeys = [" "];
 let latestInput = "";
 
 document.onkeydown = function (event) {
-    main.focus();
+    // main.focus();
     if (event.key == "r" && event.ctrlKey == true) {
         return;
     }
@@ -181,27 +181,3 @@ function applyOp(op, b, a) {
     }
     return 0;
 }
-// const input = document.querySelector("#inputText")
-
-// document.onkeydown = function (event) {
-//     event = event || window.event;
-//     let text;
-
-//     switch (event.key) {
-//         case "Shift":
-//             return;
-//         case "Alt":
-//             return;
-//         case "Control":
-//             return;
-//         case "Enter":
-//             input.textContent = "";
-//             return;
-//         case "Backspace":
-//             input.textContent = input.textContent.slice(0, input.textContent.length - 1);
-//             break;
-//         default:
-//             text = document.createTextNode(event.key);
-//     }
-//     input.appendChild(text);
-// };
