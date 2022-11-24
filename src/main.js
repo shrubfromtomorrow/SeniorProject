@@ -1,183 +1,34 @@
 
-let main = document.getElementById("mainCalcInput");
-let mainCalc = document.getElementById("mainCalc");
-
 const letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 const otherKeys = [" "];
-let latestInput = "";
+let latestInputString = "";
 
 document.onkeydown = function (event) {
-    // main.focus();
     if (event.key == "r" && event.ctrlKey == true) {
         return;
     }
     else if (letters.includes(event.key)) {
         event.preventDefault();
     }
-    else if (event.key == "ArrowUp") {
-        main.value = latestInput;
-        setTimeout(function () {
-            main.focus();
-            main.setSelectionRange(main.value.length, main.value.length);
-        }, 0);
-    }
-    else if (event.key == "ArrowDown") {
-        main.value = "";
+    else if (event.key == "Backspace") {
+        latestInputString = latestInputString.substring(0, latestInputString.length - 1);
+        console.log(latestInputString);
     }
     else {
-        console.log(event);
+        latestInputString += event.key;
+        console.log(latestInputString);
     }
 }
 
-const result = document.getElementById("result");
-const computation = document.getElementById("computation");
-
-function handleForm(event) {
-    event.preventDefault();
-    const data = new FormData(event.target);
-    let inputString = [...data.entries()][0][1];
-    latestInput = inputString;
-    computation.textContent = latestInput;
-    result.textContent = evaluate(inputString);
-    console.log(inputString);
-    mainCalc.reset();
-}
-mainCalc.addEventListener('submit', handleForm);
-
-
-
-function evaluate(expression) {
-    let tokens = expression.split('');
-
-    // Stack for numbers: 'values'
-    let values = [];
-
-    // Stack for Operators: 'ops'
-    let ops = [];
-
-    for (let i = 0; i < tokens.length; i++) {
-        // Current token is a whitespace, skip it
-        if (tokens[i] == ' ') {
-            continue;
-        }
-
-        // Current token is a number,
-        // push it to stack for numbers
-        if (tokens[i] >= '0' && tokens[i] <= '9') {
-            let sbuf = "";
-
-            // There may be more than
-            // one digits in number
-            while (i < tokens.length &&
-                tokens[i] >= '0' &&
-                tokens[i] <= '9') {
-                sbuf = sbuf + tokens[i++];
-            }
-            values.push(parseInt(sbuf, 10));
-
-            // Right now the i points to
-            // the character next to the digit,
-            // since the for loop also increases
-            // the i, we would skip one
-            //  token position; we need to
-            // decrease the value of i by 1 to
-            // correct the offset.
-            i--;
-        }
-
-        // Current token is an opening
-        // brace, push it to 'ops'
-        else if (tokens[i] == '(') {
-            ops.push(tokens[i]);
-        }
-
-        // Closing brace encountered,
-        // solve entire brace
-        else if (tokens[i] == ')') {
-            while (ops[ops.length - 1] != '(') {
-                values.push(applyOp(ops.pop(),
-                    values.pop(),
-                    values.pop()));
-            }
-            ops.pop();
-        }
-
-        // Current token is an operator.
-        else if (tokens[i] == '+' ||
-            tokens[i] == '-' ||
-            tokens[i] == '^' ||
-            tokens[i] == '*' ||
-            tokens[i] == '/') {
-
-            // While top of 'ops' has same
-            // or greater precedence to current
-            // token, which is an operator.
-            // Apply operator on top of 'ops'
-            // to top two elements in values stack
-            while (ops.length > 0 &&
-                hasPrecedence(tokens[i],
-                    ops[ops.length - 1])) {
-                values.push(applyOp(ops.pop(),
-                    values.pop(),
-                    values.pop()));
-            }
-
-            // Push current token to 'ops'.
-            ops.push(tokens[i]);
+var MQ = MathQuill.getInterface(2);
+var problemSpan = document.getElementById('problem');
+MQ.StaticMath(problemSpan);
+var answerSpan = document.getElementById('answer');
+var answerMathField = MQ.MathField(answerSpan, {
+    handlers: {
+        edit: function () {
+            var enteredMath = answerMathField.latex(); // Get entered math in LaTeX format
+            // checkAnswer(enteredMath);
         }
     }
-
-    // Entire expression has been
-    // parsed at this point, apply remaining
-    // ops to remaining values
-    while (ops.length > 0) {
-        values.push(applyOp(ops.pop(),
-            values.pop(),
-            values.pop()));
-    }
-
-    // Top of 'values' contains
-    // result, return it
-    return values.pop();
-}
-
-// Returns true if 'op2' has
-// higher or same precedence as 'op1',
-// otherwise returns false.
-function hasPrecedence(op1, op2) {
-    if (op2 == '(' || op2 == ')') {
-        return false;
-    }
-    else if ((op1 == '^') && (op2 == '*' || op2 == '/' || op2 == '+' || op2 == '-')) {
-        return false;
-    }
-    else if ((op1 == '*' || op1 == '/') &&
-        (op2 == '+' || op2 == '-')) {
-        return false;
-    }
-    else {
-        return true;
-    }
-}
-
-// A utility method to apply an
-// operator 'op' on operands 'a'
-// and 'b'. Return the result.
-function applyOp(op, b, a) {
-    switch (op) {
-        case '+':
-            return a + b;
-        case '-':
-            return a - b;
-        case '*':
-            return a * b;
-        case '^':
-            return a ** b;
-        case '/':
-            if (b == 0) {
-                alert("Cannot divide by zero");
-            }
-            return parseInt(a / b, 10);
-    }
-    return 0;
-}
+});

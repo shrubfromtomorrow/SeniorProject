@@ -16,21 +16,7 @@
     </div>
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
     <script src="../node_modules/mathquill/build/mathquill.js"></script>
-    <script>
-        var MQ = MathQuill.getInterface(2);
-        var problemSpan = document.getElementById('problem');
-        MQ.StaticMath(problemSpan);
-        var answerSpan = document.getElementById('answer');
-        var answerMathField = MQ.MathField(answerSpan, {
-            handlers: {
-                edit: function () {
-                    var enteredMath = answerMathField.latex(); // Get entered math in LaTeX format
-                    // checkAnswer(enteredMath);
-                }
-            }
-        });
-    </script>
-    <!-- <script src="main.js"></script> -->
+    <script src="main.js"></script>
 </body>
 
 </html>
