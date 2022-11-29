@@ -1,11 +1,19 @@
 
+let latestInput = "";
 var MQ = MathQuill.getInterface(2);
 var answerSpan = document.getElementById('answer');
 var answerMathField = MQ.MathField(answerSpan, {
     handlers: {
         edit: function () {
-            var enteredMath = answerMathField.latex(); // Get entered math in LaTeX format
+            latestInput = answerMathField.latex(); // Get entered math in LaTeX format
             // checkAnswer(enteredMath);
+        },
+        enter: function () {
+            console.log(latestInput);
+            let fn = evaluatex(latestInput.toString());
+            console.log(fn);
+            let result = fn();
+            console.log(result);
         }
     }
 });
@@ -23,21 +31,27 @@ document.onkeydown = function (event) {
         return;
     }
     else if (event.key == "Enter") {
-        let rootBlockChildren = document.getElementById("answer").children[1].children;
-        let rootBlockChildrenValues = [];
-        for (let i = 0; i < rootBlockChildren.length - 1; i++) {
-            rootBlockChildrenValues.push(rootBlockChildren[i].textContent);
-        }
-        console.log(rootBlockChildrenValues);
-        console.log(rootBlockChildren.length);
-        for (let i = 0; i < rootBlockChildren.length; i++) {
-            rootBlockChildren[0].remove();
-        }
+        // let rootBlock = document.getElementById("answer").children[1];
+        // let rootBlockChildren = rootBlock.children;
+        // let rootBlockChildrenValues = [];
+        // let childrenNum = 1;
+        // for (let i = 0; i < rootBlockChildren.length - 1; i++) {
+        //     rootBlockChildrenValues.push(rootBlockChildren[i].textContent);
+        //     childrenNum += 1;
+        // }
+        // console.log(rootBlockChildrenValues);
+        // for (let i = 0; i < childrenNum; i++) {
+        //     rootBlock.firstElementChild.remove();
+        // }
     }
     else if (letters.includes(event.key)) {
         event.preventDefault();
     }
     else {
-        console.log(event.key);
+        // console.log(event.key);
     }
+}
+
+document.onclick = function () {
+    answerBox.focus();
 }
