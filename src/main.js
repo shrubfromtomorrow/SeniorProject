@@ -1,5 +1,8 @@
 
 let latestInput = "";
+let resultDisplay = document.getElementById("result");
+let resultInput = document.getElementById("resultInput");
+
 var MQ = MathQuill.getInterface(2);
 var answerSpan = document.getElementById('answer');
 var answerMathField = MQ.MathField(answerSpan, {
@@ -11,9 +14,12 @@ var answerMathField = MQ.MathField(answerSpan, {
         enter: function () {
             console.log(latestInput);
             let fn = evaluatex(latestInput.toString());
-            console.log(fn);
             let result = fn();
+            resultDisplay.textContent = result;
+            resultInput.textContent = latestInput;
             console.log(result);
+            answerMathField.select();
+            answerMathField.keystroke("Backspace");
         }
     }
 });
