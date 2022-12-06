@@ -14,7 +14,10 @@ var answerMathField = MQ.MathField(answerSpan, {
         enter: function () {
             console.log(latestInput);
             let fn = evaluatex(latestInput.toString());
-            let result = fn();
+            let result = +fn().toFixed(10);
+            if (result == "Infinity") {
+                // result = "Is that actually what you want me to calculate?";
+            }
             resultDisplay.textContent = result;
             resultInput.textContent = latestInput;
             console.log(result);
@@ -51,7 +54,7 @@ document.onkeydown = function (event) {
         // }
     }
     else if (letters.includes(event.key)) {
-        event.preventDefault();
+        // event.preventDefault();
     }
     else {
         // console.log(event.key);
