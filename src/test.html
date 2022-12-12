@@ -5,22 +5,21 @@
   <meta charset="UTF-8" />
   <title>Test</title>
   <link rel="stylesheet" href="test.css" />
-  <!-- <link rel="stylesheet" href="../node_modules/mathquill/build/mathquill.css" /> -->
+  <link rel="stylesheet" href="../node_modules/mathquill/build/mathquill2.css" />
 </head>
 
 <body>
-  <canvas class="canvas"></canvas>
+  <div class="canvasCont"><canvas class="canvas"></canvas></div>
 
   <div class="controls">
-    <form class="form">
-      <label class="form__label" for="fn">f(x) = </label>
-      <input id="fn" class="form__input" name="function" placeholder="Math.sin(x)" />
-      <button type="submit" class="form__submit">Run</button>
-    </form>
+    <div id="function">f(x) = </div>
+    <div class="answerCont">
+      <div id="answer"></div>
+    </div>
   </div>
-  <!-- <script src="../node_modules/jquery/dist/jquery.min.js"></script> -->
-  <!-- <script src="../node_modules/mathquill/build/mathquill.js"></script> -->
-  <!-- <script src="../node_modules/evaluatex/dist/evalulatexUnmin.js"></script> -->
+  <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="../node_modules/mathquill/build/mathquill.js"></script>
+  <script src="../node_modules/evaluatex/dist/evalulatexUnmin.js"></script>
   <script src="test.js"></script>
 </body>
 

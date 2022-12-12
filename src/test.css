@@ -1,57 +1,42 @@
-* {
-  box-sizing: border-box;
+@font-face {
+  font-family: Symbola;
+  src: url(../node_modules/mathquill/font/Symbola.eot);
+  src: local("Symbola Regular"), local("Symbola"), url(font/Symbola.woff2) format("woff2"), url(font/Symbola.woff) format("woff"), url(font/Symbola.ttf) format("truetype"), url(font/Symbola.otf) format("opentype"), url(font/Symbola.svg#Symbola) format("svg");
 }
 
-.canvas {
-  width: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 80px;
-  background: lightblue;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.canvasCont {
+  width: 100vw;
+  height: calc(100vw - 555px);
 }
 
 .controls {
+  color: white;
   position: fixed;
   z-index: 2;
   bottom: 0;
   left: 0;
   right: 0;
-  background: #fff;
+  background: #0d0221;
   padding: 20px;
-  height: 80px;
+  height: 120px;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
-.form {
+.answerCont {
   display: flex;
-  align-items: center;
-  width: 100%;
+  justify-content: center;
+  font-size: 1.5rem;
 }
 
-.form__label {
-  flex: 0 0 40px;
-}
-
-.form__input,
-.form__submit {
-  display: inline-block;
-  border: 0;
-  padding: 10px 15px;
-  background-color: transparent;
-  outline: none;
-}
-
-.form__input {
-  border-radius: 50px 0 0 50px;
-  background: rgba(0, 0, 0, 0.1);
-  flex: 1;
-}
-
-.form__submit {
-  border-radius: 0 50px 50px 0;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  flex: 0 0 100px;
+#function {
+  font-size: 1.5rem;
+  font-family: "Symbola Regular";
 }
