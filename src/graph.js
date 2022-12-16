@@ -1,21 +1,3 @@
-let latestInput = "";
-
-var MQ = MathQuill.getInterface(2);
-var answerSpan = document.getElementById('answer');
-var answerMathField = MQ.MathField(answerSpan, {
-  handlers: {
-    edit: function () {
-      latestInput = answerMathField.latex(); // Get entered math in LaTeX format
-      // checkAnswer(enteredMath);
-    },
-    enter: function () {
-      drawGraph(latestInput.toString(), 20);
-      console.log(latestInput);
-      answerMathField.select();
-      answerMathField.keystroke("Backspace");
-    }
-  }
-});
 
 
 const canvas = document.getElementsByClassName('canvas')[0];
@@ -54,10 +36,12 @@ function drawNums(zoom) {
   ctx.textAlign = "center";
 
   for (let x = -(zoom / 2); x <= (zoom / 2); x++) {
-    ctx.fillStyle = "white";
-    ctx.fillRect(((x) * (sizeX / zoom)) + (sizeX / 2) - 8, sizeY / 2 + 1.5, 15, 15);
-    ctx.fillStyle = "black";
-    ctx.fillText(x.toString(), ((x) * (sizeX / zoom)) + (sizeX / 2), sizeY / 2 + 13);
+    if (x % (zoom / 20) == 0) {
+      ctx.fillStyle = "white";
+      ctx.fillRect(((x) * (sizeX / zoom)) + (sizeX / 2) - 8, sizeY / 2 + 1.5, 15, 15);
+      ctx.fillStyle = "black";
+      ctx.fillText(x.toString(), ((x) * (sizeX / zoom)) + (sizeX / 2), sizeY / 2 + 13);
+    }
   }
 }
 
@@ -101,21 +85,72 @@ function drawGraph(formula, zoom) {
   colors = colors.filter(function (e) { return e !== ctx.strokeStyle })
 
   ctx.lineWidth = 2;
-  for (let x = -(zoom / 2); x < (zoom / 2); x += (zoom / 1000)) {
+  for (let x = -(zoom / 2); x < (zoom / 2); x += (zoom / 10000)) {
     fn = evaluatex(formula);
     yValue = fn({ x });
     yValue = yValue.toFixed(10);
     yValue = parseFloat(yValue);
     ctx.beginPath();
     ctx.moveTo(prevPoint[0], prevPoint[1]);
-    ctx.lineTo((sizeX / 2) + (x * (sizeX / zoom)), (sizeY / 2) - (yValue * (sizeX / zoom)));
+    ctx.lineTo((sizeX / 2) + (x * (sizeX / zoom)), (sizeY / 2) - (yValue * (sizeX / zoom)))
+    // ctx.fillRect((sizeX / 2) + (x * (sizeX / zoom)), (sizeY / 2) - (yValue * (sizeX / zoom)), 1, 1);
     ctx.stroke();
     prevPoint = [(sizeX / 2) + (x * (sizeX / zoom)), (sizeY / 2) - (yValue * (sizeX / zoom))];
   }
 }
 
-drawGrid(20);
-drawAxes(20);
-drawNums(20);
+function zoomOut() {
+  zoomValue += 40;
+  ctx.clearRect(0, 0, sizeX, sizeY);
+  console.log(latestInput);
+  drawGrid(zoomValue);
+  drawAxes(zoomValue);
+  drawNums(zoomValue);
+  drawGraph(latestInput.toString(), zoomValue);
+}
 
+function zoomIn() {
+  zoomValue -= 40;
+  ctx.clearRect(0, 0, sizeX, sizeY);
+  drawGrid(zoomValue);
+  drawAxes(zoomValue);
+  drawNums(zoomValue);
+  drawGraph(latestInput.toString(), zoomValue);
+}
+
+const zoomOutButton = document.getElementById("zoomOut");
+const zoomInButton = document.getElementById("zoomIn");
+
+zoomOutButton.addEventListener("click", function () {
+  zoomOut();
+});
+
+zoomInButton.addEventListener("click", function () {
+  zoomIn();
+});
+
+let latestInput = "";
+let zoomValue = 20;
+
+var MQ = MathQuill.getInterface(2);
+var answerSpan = document.getElementById('answer');
+var answerMathField = MQ.MathField(answerSpan, {
+  handlers: {
+    edit: function () {
+      // checkAnswer(enteredMath);
+    },
+    enter: function () {
+      latestInput = answerMathField.latex(); // Get entered math in LaTeX format
+      drawGraph(latestInput.toString(), zoomValue);
+      console.log(latestInput);
+      answerMathField.select();
+      answerMathField.keystroke("Backspace");
+    }
+  }
+});
+
+
+drawGrid(zoomValue);
+drawAxes(zoomValue);
+drawNums(zoomValue);
 

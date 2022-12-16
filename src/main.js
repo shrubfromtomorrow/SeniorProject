@@ -20,6 +20,7 @@ var answerMathField = MQ.MathField(answerSpan, {
             }
             resultDisplay.textContent = result;
             resultInput.textContent = latestInput;
+            MQ.StaticMath(resultInput);
             console.log(result);
             answerMathField.select();
             answerMathField.keystroke("Backspace");
