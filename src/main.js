@@ -57,11 +57,18 @@ document.onkeydown = function (event) {
     else if (letters.includes(event.key)) {
         // event.preventDefault();
     }
+    else if (event.key == "`") {
+        window.location.replace("graph.html");
+    }
     else {
-        // console.log(event.key);
+        console.log(event);
     }
 }
 
 document.onclick = function () {
     answerBox.focus();
 }
+
+
+
+

@@ -38,7 +38,7 @@ function drawNums(zoom) {
   for (let x = -(zoom / 2); x <= (zoom / 2); x++) {
     if (x % (zoom / 20) == 0) {
       ctx.fillStyle = "white";
-      ctx.fillRect(((x) * (sizeX / zoom)) + (sizeX / 2) - 8, sizeY / 2 + 1.5, 15, 15);
+      ctx.fillRect(((x) * (sizeX / zoom)) + (sizeX / 2) - 8, sizeY / 2 + 1, 15, 15);
       ctx.fillStyle = "black";
       ctx.fillText(x.toString(), ((x) * (sizeX / zoom)) + (sizeX / 2), sizeY / 2 + 13);
     }
@@ -85,7 +85,7 @@ function drawGraph(formula, zoom) {
   colors = colors.filter(function (e) { return e !== ctx.strokeStyle })
 
   ctx.lineWidth = 2;
-  for (let x = -(zoom / 2); x < (zoom / 2); x += (zoom / 10000)) {
+  for (let x = -(zoom / 2); x < (zoom / 2); x += (zoom / 5000)) {
     fn = evaluatex(formula);
     yValue = fn({ x });
     yValue = yValue.toFixed(10);
@@ -149,6 +149,15 @@ var answerMathField = MQ.MathField(answerSpan, {
   }
 });
 
+let answerBox = document.getElementById("answer").firstChild.firstChild;
+answerBox.focus();
+
+document.onkeydown = function (event) {
+  answerBox.focus();
+  if (event.key == "`") {
+    window.location.replace("index.html");
+  }
+}
 
 drawGrid(zoomValue);
 drawAxes(zoomValue);
