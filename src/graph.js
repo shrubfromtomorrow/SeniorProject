@@ -121,39 +121,83 @@ function zoomIn() {
 const zoomOutButton = document.getElementById("zoomOut");
 const zoomInButton = document.getElementById("zoomIn");
 
-zoomOutButton.addEventListener("click", function () {
-  zoomOut();
-});
+// zoomOutButton.addEventListener("click", function () {
+//   zoomOut();
+// });
 
-zoomInButton.addEventListener("click", function () {
-  zoomIn();
-});
+// zoomInButton.addEventListener("click", function () {
+//   zoomIn();
+// });
 
 let latestInput = "";
 let zoomValue = 20;
 
 var MQ = MathQuill.getInterface(2);
-var answerSpan = document.getElementById('answer');
-var answerMathField = MQ.MathField(answerSpan, {
+var answerSpan1 = document.getElementById('answer1');
+var answerMathField1 = MQ.MathField(answerSpan1, {
   handlers: {
     edit: function () {
       // checkAnswer(enteredMath);
     },
     enter: function () {
-      latestInput = answerMathField.latex(); // Get entered math in LaTeX format
+      latestInput = answerMathField1.latex(); // Get entered math in LaTeX format
       drawGraph(latestInput.toString(), zoomValue);
       console.log(latestInput);
-      answerMathField.select();
-      answerMathField.keystroke("Backspace");
+      answerMathField1.select();
+      answerMathField1.keystroke("Backspace");
     }
   }
 });
 
-let answerBox = document.getElementById("answer").firstChild.firstChild;
-answerBox.focus();
+var answerSpan2 = document.getElementById('answer2');
+var answerMathField2 = MQ.MathField(answerSpan2, {
+  handlers: {
+    edit: function () {
+      // checkAnswer(enteredMath);
+    },
+    enter: function () {
+      latestInput = answerMathField2.latex(); // Get entered math in LaTeX format
+      drawGraph(latestInput.toString(), zoomValue);
+      console.log(latestInput);
+      answerMathField2.select();
+      answerMathField2.keystroke("Backspace");
+    }
+  }
+});
+
+var answerSpan3 = document.getElementById('answer3');
+var answerMathField3 = MQ.MathField(answerSpan3, {
+  handlers: {
+    edit: function () {
+      // checkAnswer(enteredMath);
+    },
+    enter: function () {
+      latestInput = answerMathField3.latex(); // Get entered math in LaTeX format
+      drawGraph(latestInput.toString(), zoomValue);
+      console.log(latestInput);
+      answerMathField3.select();
+      answerMathField3.keystroke("Backspace");
+    }
+  }
+});
+
+var answerSpan4 = document.getElementById('answer4');
+var answerMathField4 = MQ.MathField(answerSpan4, {
+  handlers: {
+    edit: function () {
+      // checkAnswer(enteredMath);
+    },
+    enter: function () {
+      latestInput = answerMathField4.latex(); // Get entered math in LaTeX format
+      drawGraph(latestInput.toString(), zoomValue);
+      console.log(latestInput);
+      answerMathField4.select();
+      answerMathField4.keystroke("Backspace");
+    }
+  }
+});
 
 document.onkeydown = function (event) {
-  answerBox.focus();
   if (event.key == "`") {
     window.location.replace("index.html");
   }
