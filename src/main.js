@@ -1,3 +1,4 @@
+console.log("Switch windows with tilda");
 
 let latestInput = "";
 let resultDisplay = document.getElementById("result");

@@ -1,7 +1,9 @@
-
+console.log("Switch windows with tilda, show input window with alt+s");
 
 const canvas = document.getElementsByClassName('canvas')[0];
 const canvasCont = document.getElementsByClassName("canvasCont")[0];
+let latestInput = "";
+let zoomValue = 20;
 
 
 
@@ -129,79 +131,6 @@ const zoomInButton = document.getElementById("zoomIn");
 //   zoomIn();
 // });
 
-let latestInput = "";
-let zoomValue = 20;
-
-var MQ = MathQuill.getInterface(2);
-var answerSpan1 = document.getElementById('answer1');
-var answerMathField1 = MQ.MathField(answerSpan1, {
-  handlers: {
-    edit: function () {
-      // checkAnswer(enteredMath);
-    },
-    enter: function () {
-      latestInput = answerMathField1.latex(); // Get entered math in LaTeX format
-      drawGraph(latestInput.toString(), zoomValue);
-      console.log(latestInput);
-      answerMathField1.select();
-      answerMathField1.keystroke("Backspace");
-    }
-  }
-});
-
-var answerSpan2 = document.getElementById('answer2');
-var answerMathField2 = MQ.MathField(answerSpan2, {
-  handlers: {
-    edit: function () {
-      // checkAnswer(enteredMath);
-    },
-    enter: function () {
-      latestInput = answerMathField2.latex(); // Get entered math in LaTeX format
-      drawGraph(latestInput.toString(), zoomValue);
-      console.log(latestInput);
-      answerMathField2.select();
-      answerMathField2.keystroke("Backspace");
-    }
-  }
-});
-
-var answerSpan3 = document.getElementById('answer3');
-var answerMathField3 = MQ.MathField(answerSpan3, {
-  handlers: {
-    edit: function () {
-      // checkAnswer(enteredMath);
-    },
-    enter: function () {
-      latestInput = answerMathField3.latex(); // Get entered math in LaTeX format
-      drawGraph(latestInput.toString(), zoomValue);
-      console.log(latestInput);
-      answerMathField3.select();
-      answerMathField3.keystroke("Backspace");
-    }
-  }
-});
-
-var answerSpan4 = document.getElementById('answer4');
-var answerMathField4 = MQ.MathField(answerSpan4, {
-  handlers: {
-    edit: function () {
-      // checkAnswer(enteredMath);
-    },
-    enter: function () {
-      latestInput = answerMathField4.latex(); // Get entered math in LaTeX format
-      drawGraph(latestInput.toString(), zoomValue);
-      console.log(latestInput);
-      answerMathField4.select();
-      answerMathField4.keystroke("Backspace");
-    }
-  }
-});
-
-document.onkeydown = function (event) {
-  if (event.key == "`") {
-    window.location.replace("index.html");
-  }
-}
 
 drawGrid(zoomValue);
 drawAxes(zoomValue);

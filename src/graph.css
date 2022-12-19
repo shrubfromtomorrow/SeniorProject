@@ -10,6 +10,10 @@
   padding: 0;
 }
 
+body {
+  overflow: hidden;
+}
+
 .canvasCont {
   width: 100vw;
   height: 100vh;
@@ -20,7 +24,7 @@
 }
 
 .functionInput {
-  display: flex;
+  display: none;
   flex-direction: column;
   justify-content: center;
   background-color: white;
@@ -87,6 +91,18 @@
   margin-left: 1rem;
   display: flex;
   justify-content: center;
+  font-size: 1.5rem;
+}
+
+.submitCont {
+  display: flex;
+  align-items: center;
+  background-color: #0d0221;
+  color: white;
+  flex-grow: 1;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 10px;
   font-size: 1.5rem;
 }
 
