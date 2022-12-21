@@ -48,15 +48,16 @@
     "desmos": "^1.5.4",
     "electron-squirrel-startup": "^1.0.0",
     "evaluatex": "^2.2.0",
+    "ipc": "^0.0.1",
     "jquery": "^3.6.1",
     "mathquill": "^0.10.1-a"
   },
   "devDependencies": {
-    "@electron-forge/cli": "^6.0.0-beta.65",
-    "@electron-forge/maker-deb": "^6.0.0-beta.65",
-    "@electron-forge/maker-rpm": "^6.0.0-beta.65",
-    "@electron-forge/maker-squirrel": "^6.0.0-beta.65",
-    "@electron-forge/maker-zip": "^6.0.0-beta.65",
+    "@electron-forge/cli": "^6.0.4",
+    "@electron-forge/maker-deb": "^6.0.4",
+    "@electron-forge/maker-rpm": "^6.0.4",
+    "@electron-forge/maker-squirrel": "^6.0.4",
+    "@electron-forge/maker-zip": "^6.0.4",
     "electron": "20.0.1"
   }
 }

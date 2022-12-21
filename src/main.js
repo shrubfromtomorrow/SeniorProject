@@ -1,3 +1,5 @@
+let ipc = require('ipc');
+
 console.log("Switch windows with tilda");
 
 let latestInput = "";
@@ -59,7 +61,8 @@ document.onkeydown = function (event) {
         // event.preventDefault();
     }
     else if (event.key == "`") {
-        window.location.replace("graph.html");
+        ipc.send('switch');
+        // window.location.replace("graph.html");
     }
     else {
         console.log(event);
