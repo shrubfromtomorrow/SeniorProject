@@ -1,4 +1,3 @@
-let ipc = require('ipc');
 
 console.log("Switch windows with tilda");
 
@@ -31,7 +30,6 @@ var answerMathField = MQ.MathField(answerSpan, {
     }
 });
 
-
 let answerBox = document.getElementById("answer").firstChild.firstChild;
 answerBox.focus();
 
@@ -61,7 +59,7 @@ document.onkeydown = function (event) {
         // event.preventDefault();
     }
     else if (event.key == "`") {
-        ipc.send('switch');
+        window.electronAPI.setTitle();
         // window.location.replace("graph.html");
     }
     else {

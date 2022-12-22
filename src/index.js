@@ -1,5 +1,4 @@
-const { app, BrowserWindow } = require('electron');
-var ipc = require('ipc');
+const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -20,7 +19,7 @@ const createWindow = () => {
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
     },
-    show: false,
+    "show": false,
     "fullscreen": true,
   });
 
@@ -31,7 +30,7 @@ const createWindow = () => {
   graphWindow.loadFile(path.join(__dirname, 'graph.html'));
   graphWindow.removeMenu();
 
-  ipc.on('switch', function () {
+  ipcMain.on('switch', function () {
     graphWindow.show();
   })
 };
