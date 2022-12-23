@@ -36,7 +36,7 @@ answerBox.focus();
 const letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 const otherKeys = [" "];
 
-document.onkeydown = function (event) {
+document.onkeyup = function (event) {
     answerBox.focus();
     if (event.key == "r" && event.ctrlKey == true) {
         return;
@@ -59,7 +59,7 @@ document.onkeydown = function (event) {
         // event.preventDefault();
     }
     else if (event.key == "`") {
-        window.electronAPI.setTitle();
+        window.electronAPI.switch();
         // window.location.replace("graph.html");
     }
     else {

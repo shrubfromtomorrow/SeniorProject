@@ -13,20 +13,20 @@ const createWindow = () => {
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
     },
-    "fullscreen": true,
-  });
-  const graphWindow = new BrowserWindow({
-    webPreferences: {
-      preload: path.join(__dirname, 'preload.js'),
-    },
-    "show": false,
-    "fullscreen": true,
+    show: true,
   });
 
   // and load the index.html of the app.
   mainWindow.loadFile(path.join(__dirname, 'index.html'));
-
   mainWindow.removeMenu();
+
+  const graphWindow = new BrowserWindow({
+    webPreferences: {
+      preload: path.join(__dirname, 'preloadGraph.js'),
+    },
+    show: false,
+  });
+
   graphWindow.loadFile(path.join(__dirname, 'graph.html'));
   graphWindow.removeMenu();
 
