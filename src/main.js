@@ -1,5 +1,5 @@
 
-console.log("Switch windows with tilda");
+console.log("Switch windows with alt+j");
 
 let latestInput = "";
 let resultDisplay = document.getElementById("result");
@@ -36,39 +36,18 @@ answerBox.focus();
 const letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 const otherKeys = [" "];
 
-document.onkeyup = function (event) {
+document.onkeydown = function (event) {
     answerBox.focus();
     if (event.key == "r" && event.ctrlKey == true) {
         return;
     }
-    else if (event.key == "Enter") {
-        // let rootBlock = document.getElementById("answer").children[1];
-        // let rootBlockChildren = rootBlock.children;
-        // let rootBlockChildrenValues = [];
-        // let childrenNum = 1;
-        // for (let i = 0; i < rootBlockChildren.length - 1; i++) {
-        //     rootBlockChildrenValues.push(rootBlockChildren[i].textContent);
-        //     childrenNum += 1;
-        // }
-        // console.log(rootBlockChildrenValues);
-        // for (let i = 0; i < childrenNum; i++) {
-        //     rootBlock.firstElementChild.remove();
-        // }
-    }
-    else if (letters.includes(event.key)) {
-        // event.preventDefault();
-    }
-    else if (event.key == "`") {
+    else if (event.key == "j" && event.altKey == true) {
         window.electronAPI.switch();
         // window.location.replace("graph.html");
     }
     else {
         console.log(event);
     }
-}
-
-document.onclick = function () {
-    answerBox.focus();
 }
 
 

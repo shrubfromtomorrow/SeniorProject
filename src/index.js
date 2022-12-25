@@ -1,4 +1,6 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
+const electron = require('electron');
+const globalShortcut = electron.globalShortcut;
 const path = require('path');
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -8,30 +10,50 @@ if (require('electron-squirrel-startup')) {
 }
 
 const createWindow = () => {
+  let activeWindow = "calculator";
   // Create the browser window.
   const mainWindow = new BrowserWindow({
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
+      devTools: true,
     },
     show: true,
   });
 
   // and load the index.html of the app.
   mainWindow.loadFile(path.join(__dirname, 'index.html'));
-  mainWindow.removeMenu();
+  // mainWindow.removeMenu();
 
   const graphWindow = new BrowserWindow({
     webPreferences: {
       preload: path.join(__dirname, 'preloadGraph.js'),
+      devTools: true,
     },
     show: false,
   });
 
   graphWindow.loadFile(path.join(__dirname, 'graph.html'));
-  graphWindow.removeMenu();
+  graphWindow.reload();
+  // graphWindow.removeMenu();
 
+  let graphLoads = 0;
+
+  // globalShortcut may be a better way to handle this switching
   ipcMain.on('switch', function () {
-    graphWindow.show();
+    if (activeWindow == "calculator") {
+      graphWindow.show();
+      mainWindow.hide();
+      activeWindow = "graph";
+      graphWindow.webContents.on('did-finish-load', function () {
+        graphWindow.webContents.send('reload', graphLoads.toString());
+      });
+      graphLoads++;
+    }
+    else if (activeWindow == "graph") {
+      mainWindow.show();
+      graphWindow.hide();
+      activeWindow = "calculator";
+    }
   })
 };
 

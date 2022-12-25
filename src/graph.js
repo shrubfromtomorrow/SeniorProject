@@ -1,4 +1,22 @@
-console.log("Switch windows with tilda, show input window with alt+s");
+console.log("Switch windows with alt+j, show input window with alt+s");
+
+const ipcRenderer = window.ipcRenderer;
+
+
+document.onkeydown = function (event) {
+  if (event.key == "r" && event.ctrlKey == true) {
+    return;
+  }
+  else if (event.key == "j" && event.altKey == true) {
+    window.electronAPI.switch();
+    // window.location.replace("graph.html");
+  }
+}
+
+ipcRenderer.on('reload', function (evt, reloadNum) {
+  console.log(reloadNum); // Returns: {'SAVED': 'File Saved'}
+});
+// location.reload();
 
 const canvas = document.getElementsByClassName('canvas')[0];
 const canvasCont = document.getElementsByClassName("canvasCont")[0];
