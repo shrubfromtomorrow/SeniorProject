@@ -1,6 +1,11 @@
 const { contextBridge, ipcRenderer } = require('electron');
-window.ipcRenderer = require('electron').ipcRenderer;
 
-contextBridge.exposeInMainWorld('electronAPI', {
-  switch: (title) => window.ipcRenderer.send('switch')
-})
+
+const API = {
+  onReload: (reload) => ipcRenderer.on("reload", (event, args) => {
+    reload(args);
+  }),
+  switch: (title) => ipcRenderer.send('switch')
+}
+
+contextBridge.exposeInMainWorld("api", API);

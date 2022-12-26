@@ -8,14 +8,14 @@ document.onkeydown = function (event) {
     return;
   }
   else if (event.key == "j" && event.altKey == true) {
-    window.electronAPI.switch();
+    window.api.switch();
     // window.location.replace("graph.html");
   }
 }
 
-ipcRenderer.on('reload', function (evt, reloadNum) {
-  console.log(reloadNum); // Returns: {'SAVED': 'File Saved'}
-});
+window.api.onReload((data) => {
+  location.reload();
+})
 // location.reload();
 
 const canvas = document.getElementsByClassName('canvas')[0];
