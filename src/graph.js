@@ -1,28 +1,10 @@
 console.log("Switch windows with alt+j, show input window with alt+s");
 
-const ipcRenderer = window.ipcRenderer;
-
-
-document.onkeydown = function (event) {
-  if (event.key == "r" && event.ctrlKey == true) {
-    return;
-  }
-  else if (event.key == "j" && event.altKey == true) {
-    window.api.switch();
-    // window.location.replace("graph.html");
-  }
-}
-
-window.api.onReload((data) => {
-  location.reload();
-})
-// location.reload();
 
 const canvas = document.getElementsByClassName('canvas')[0];
 const canvasCont = document.getElementsByClassName("canvasCont")[0];
 let latestInput = "";
 let zoomValue = 20;
-
 
 
 let ctx = canvas.getContext('2d');
@@ -31,6 +13,7 @@ ctx.imageSmoothingEnabled = false;
 // Set display size (css pixels).
 let sizeX = canvasCont.getBoundingClientRect().width;
 let sizeY = canvasCont.getBoundingClientRect().height;
+console.log(sizeY);
 canvas.style.width = sizeX + "px";
 canvas.style.height = sizeY + "px";
 // Set actual size in memory (scaled to account for extra pixel density).
@@ -154,3 +137,15 @@ drawGrid(zoomValue);
 drawAxes(zoomValue);
 drawNums(zoomValue);
 
+const ipcRenderer = window.ipcRenderer;
+
+
+document.onkeydown = function (event) {
+  if (event.key == "r" && event.ctrlKey == true) {
+    return;
+  }
+  else if (event.key == "j" && event.altKey == true) {
+    window.api.switch();
+    // window.location.replace("graph.html");
+  }
+}

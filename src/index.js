@@ -35,20 +35,13 @@ const createWindow = () => {
   graphWindow.loadFile(path.join(__dirname, 'graph.html'));
   // graphWindow.removeMenu();
 
-  let graphLoads = 0;
 
-  graphWindow.webContents.on('did-finish-load', () => {
-    if (graphLoads == 100) {
-      graphWindow.reload();
-    }
-    console.log(graphLoads);
-    graphLoads++;
-  })
 
   // globalShortcut may be a better way to handle this switching
   ipcMain.on('switch', function () {
     if (activeWindow == "calculator") {
       graphWindow.show();
+      setTimeout(function () { graphWindow.reload() }, 142);
       mainWindow.hide();
       activeWindow = "graph";
     }
