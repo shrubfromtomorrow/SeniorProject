@@ -12,12 +12,13 @@ if (require('electron-squirrel-startup')) {
 const createWindow = () => {
   let activeWindow = "calculator";
   // Create the browser window.
+
   const mainWindow = new BrowserWindow({
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       devTools: true,
     },
-    show: true,
+    show: false,
   });
 
   // and load the index.html of the app.
@@ -29,19 +30,16 @@ const createWindow = () => {
       preload: path.join(__dirname, 'preloadGraph.js'),
       devTools: true,
     },
-    show: false,
+    show: true,
   });
-
-  graphWindow.loadFile(path.join(__dirname, 'graph.html'));
   // graphWindow.removeMenu();
-
+  graphWindow.loadFile(path.join(__dirname, 'graph.html'));
 
 
   // globalShortcut may be a better way to handle this switching
   ipcMain.on('switch', function () {
     if (activeWindow == "calculator") {
       graphWindow.show();
-      setTimeout(function () { graphWindow.reload() }, 142);
       mainWindow.hide();
       activeWindow = "graph";
     }

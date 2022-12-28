@@ -13,7 +13,10 @@ ctx.imageSmoothingEnabled = false;
 // Set display size (css pixels).
 let sizeX = canvasCont.getBoundingClientRect().width;
 let sizeY = canvasCont.getBoundingClientRect().height;
+
+console.log(sizeX);
 console.log(sizeY);
+
 canvas.style.width = sizeX + "px";
 canvas.style.height = sizeY + "px";
 // Set actual size in memory (scaled to account for extra pixel density).
@@ -21,7 +24,7 @@ let scale = window.devicePixelRatio; // Change to 1 on retina screens to see blu
 canvas.width = sizeX * scale;
 canvas.height = sizeY * scale;
 // Normalize coordinate system to use css pixels.
-ctx.scale(scale, scale);
+// ctx.scale(scale, scale);
 
 function drawAxes() {
   ctx.strokeStyle = "black";
