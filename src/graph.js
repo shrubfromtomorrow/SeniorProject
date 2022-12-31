@@ -3,7 +3,7 @@ console.log("Switch windows with alt+j, show input window with alt+s");
 
 const canvas = document.getElementsByClassName('canvas')[0];
 const canvasCont = document.getElementsByClassName("canvasCont")[0];
-let latestInput = "";
+let latestGraphInput = "";
 let zoomValue = 20;
 
 
@@ -13,6 +13,9 @@ ctx.imageSmoothingEnabled = false;
 // Set display size (css pixels).
 let sizeX = canvasCont.getBoundingClientRect().width;
 let sizeY = canvasCont.getBoundingClientRect().height;
+
+// let sizeX = window.innerWidth;
+// let sizeY = window.innerHeight;
 
 console.log(sizeX);
 console.log(sizeY);
@@ -24,7 +27,7 @@ let scale = window.devicePixelRatio; // Change to 1 on retina screens to see blu
 canvas.width = sizeX * scale;
 canvas.height = sizeY * scale;
 // Normalize coordinate system to use css pixels.
-// ctx.scale(scale, scale);
+ctx.scale(scale, scale);
 
 function drawAxes() {
   ctx.strokeStyle = "black";
@@ -108,11 +111,11 @@ function drawGraph(formula, zoom) {
 function zoomOut() {
   zoomValue += 40;
   ctx.clearRect(0, 0, sizeX, sizeY);
-  console.log(latestInput);
+  console.log(latestGraphInput);
   drawGrid(zoomValue);
   drawAxes(zoomValue);
   drawNums(zoomValue);
-  drawGraph(latestInput.toString(), zoomValue);
+  drawGraph(latestGraphInput.toString(), zoomValue);
 }
 
 function zoomIn() {
@@ -121,7 +124,7 @@ function zoomIn() {
   drawGrid(zoomValue);
   drawAxes(zoomValue);
   drawNums(zoomValue);
-  drawGraph(latestInput.toString(), zoomValue);
+  drawGraph(latestGraphInput.toString(), zoomValue);
 }
 
 const zoomOutButton = document.getElementById("zoomOut");
@@ -136,19 +139,8 @@ const zoomInButton = document.getElementById("zoomIn");
 // });
 
 
-drawGrid(zoomValue);
-drawAxes(zoomValue);
-drawNums(zoomValue);
-
-const ipcRenderer = window.ipcRenderer;
-
-
-document.onkeydown = function (event) {
-  if (event.key == "r" && event.ctrlKey == true) {
-    return;
-  }
-  else if (event.key == "j" && event.altKey == true) {
-    window.api.switch();
-    // window.location.replace("graph.html");
-  }
-}
+window.onload = (event) => {
+  drawGrid(zoomValue);
+  drawAxes(zoomValue);
+  drawNums(zoomValue);
+};

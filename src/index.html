@@ -6,22 +6,52 @@
     <title>Test</title>
     <link rel="stylesheet" href="index.css" />
     <link rel="stylesheet" href="../node_modules/mathquill/build/mathquill.css" />
+    <link rel="stylesheet" href="graph.css" />
+    <!-- <link rel="stylesheet" href="../node_modules/mathquill/build/mathquill2.css" /> CONFLICTING MATHQUILL CSS-->
 </head>
 
 <body>
-    <div class="container">
-        <div class="resultCont">
-            <div id="result"></div>
-            <div id="resultInput"></div>
+    <section id="calculatorWindow" style="display:block;">
+        <div class="container">
+            <div class="resultCont">
+                <div id="result"></div>
+                <div id="resultInput"></div>
+            </div>
+            <div class="answerCont">
+                <div id="answer"></div>
+            </div>
         </div>
-        <div class="answerCont">
-            <div id="answer"></div>
+    </section>
+    <section id="graphWindow" style="opacity:0;">
+        <div class="functionInput">
+            <div class="function">f(x) = <div class="answerCont1">
+                    <div id="answer1"></div>
+                </div>
+            </div>
+            <div class="function">g(x) = <div class="answerCont2">
+                    <div id="answer2"></div>
+                </div>
+            </div>
+            <div class="function">h(x) = <div class="answerCont3">
+                    <div id="answer3"></div>
+                </div>
+            </div>
+            <div class="function">j(x) = <div class="answerCont4">
+                    <div id="answer4"></div>
+                </div>
+            </div>
+            <div class="submitCont">
+                <div>GRAPH</div>
+            </div>
         </div>
-    </div>
+        <div class="canvasCont"><canvas class="canvas"></canvas></div>
+    </section>
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
     <script src="../node_modules/mathquill/build/mathquill.js"></script>
     <script src="../node_modules/evaluatex/dist/evalulatexUnmin.js"></script>
     <script src="main.js"></script>
+    <script src="graph.js"></script>
+    <script src="graphInput.js"></script>
 </body>
 
 </html>

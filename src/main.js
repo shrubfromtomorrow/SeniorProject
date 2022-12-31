@@ -33,8 +33,8 @@ var answerMathField = MQ.MathField(answerSpan, {
 let answerBox = document.getElementById("answer").firstChild.firstChild;
 answerBox.focus();
 
-const letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
-const otherKeys = [" "];
+let calcWindow = document.getElementById("calculatorWindow");
+let graphWindow = document.getElementById("graphWindow");
 
 document.onkeydown = function (event) {
     answerBox.focus();
@@ -42,8 +42,8 @@ document.onkeydown = function (event) {
         return;
     }
     else if (event.key == "j" && event.altKey == true) {
-        window.electronAPI.switch();
-        // window.location.replace("graph.html");
+        calcWindow.style.display = "none";
+        graphWindow.style.opacity = "1";
     }
     else {
         console.log(event);

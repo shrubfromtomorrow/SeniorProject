@@ -73,12 +73,12 @@ document.onkeyup = function (event) {
 function graphAll() {
   inputVisible = false;
   inputWindow.style.display = "none";
-  latestInput = answerMathField1.latex(); // Get entered math in LaTeX format
-  drawGraph(latestInput.toString(), zoomValue);
-  latestInput = answerMathField2.latex(); // Get entered math in LaTeX format
-  drawGraph(latestInput.toString(), zoomValue);
-  latestInput = answerMathField3.latex(); // Get entered math in LaTeX format
-  drawGraph(latestInput.toString(), zoomValue);
-  latestInput = answerMathField4.latex(); // Get entered math in LaTeX format
-  drawGraph(latestInput.toString(), zoomValue);
+  latestGraphInput = answerMathField1.latex(); // Get entered math in LaTeX format
+  drawGraph(latestGraphInput.toString(), zoomValue);
+  latestGraphInput = answerMathField2.latex(); // Get entered math in LaTeX format
+  drawGraph(latestGraphInput.toString(), zoomValue);
+  latestGraphInput = answerMathField3.latex(); // Get entered math in LaTeX format
+  drawGraph(latestGraphInput.toString(), zoomValue);
+  latestGraphInput = answerMathField4.latex(); // Get entered math in LaTeX format
+  drawGraph(latestGraphInput.toString(), zoomValue);
 }

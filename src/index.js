@@ -18,37 +18,16 @@ const createWindow = () => {
       preload: path.join(__dirname, 'preload.js'),
       devTools: true,
     },
-    show: false,
+    show: true,
   });
 
   // and load the index.html of the app.
   mainWindow.loadFile(path.join(__dirname, 'index.html'));
   // mainWindow.removeMenu();
 
-  const graphWindow = new BrowserWindow({
-    webPreferences: {
-      preload: path.join(__dirname, 'preloadGraph.js'),
-      devTools: true,
-    },
-    show: true,
-  });
-  // graphWindow.removeMenu();
-  graphWindow.loadFile(path.join(__dirname, 'graph.html'));
 
 
-  // globalShortcut may be a better way to handle this switching
-  ipcMain.on('switch', function () {
-    if (activeWindow == "calculator") {
-      graphWindow.show();
-      mainWindow.hide();
-      activeWindow = "graph";
-    }
-    else if (activeWindow == "graph") {
-      mainWindow.show();
-      graphWindow.hide();
-      activeWindow = "calculator";
-    }
-  })
+
 };
 
 // This method will be called when Electron has finished
