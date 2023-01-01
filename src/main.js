@@ -36,14 +36,24 @@ answerBox.focus();
 let calcWindow = document.getElementById("calculatorWindow");
 let graphWindow = document.getElementById("graphWindow");
 
+let activeWindow = "calculator";
+
 document.onkeydown = function (event) {
     answerBox.focus();
     if (event.key == "r" && event.ctrlKey == true) {
         return;
     }
     else if (event.key == "j" && event.altKey == true) {
-        calcWindow.style.display = "none";
-        graphWindow.style.opacity = "1";
+        if (activeWindow == "calculator") {
+            calcWindow.style.visibility = "hidden";
+            graphWindow.style.visibility = "visible";
+            activeWindow = "graph"
+        }
+        else if (activeWindow == "graph") {
+            graphWindow.style.visibility = "hidden";
+            calcWindow.style.visibility = "visible";
+            activeWindow = "calculator"
+        }
     }
     else {
         console.log(event);

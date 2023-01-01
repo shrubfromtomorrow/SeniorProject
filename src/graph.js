@@ -139,8 +139,6 @@ const zoomInButton = document.getElementById("zoomIn");
 // });
 
 
-window.onload = (event) => {
-  drawGrid(zoomValue);
-  drawAxes(zoomValue);
-  drawNums(zoomValue);
-};
+drawGrid(zoomValue);
+drawAxes(zoomValue);
+drawNums(zoomValue);

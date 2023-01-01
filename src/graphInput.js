@@ -46,7 +46,6 @@ const submitButton = document.getElementsByClassName("submitCont")[0];
 submitButton.addEventListener("click", function () {
   inputVisible = false;
   inputWindow.style.display = "none";
-
   graphAll();
 });
 
