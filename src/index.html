@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8" />
     <title>Test</title>
-    <link rel="stylesheet" href="index.css" />
     <link rel="stylesheet" href="../node_modules/mathquill/build/mathquill.css" />
+    <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="../node_modules/mathquill/build/mathquill2.css" />
     <link rel="stylesheet" href="graph.css" />
-    <!-- <link rel="stylesheet" href="../node_modules/mathquill/build/mathquill2.css" /> CONFLICTING MATHQUILL CSS-->
 </head>
 
 <body>
-    <section id="calculatorWindow" style="visibility: visible;">
+    <section class="calculatorWindow" style="visibility: visible;">
         <div class="container">
             <div class="resultCont">
                 <div id="result"></div>
@@ -22,22 +22,36 @@
             </div>
         </div>
     </section>
-    <section id="graphWindow" style="visibility: hidden;">
+    <section class="graphWindow" style="visibility: hidden;">
         <div class="functionInput">
-            <div class="function">f(x) = <div class="answerCont1">
+            <div id="functionLabel">f(x) = </div>
+            <div class="function"><div class="answerCont1">
                     <div id="answer1"></div>
                 </div>
             </div>
-            <div class="function">g(x) = <div class="answerCont2">
+            <div id="functionLabel">g(x) = </div>
+            <div class="function"><div class="answerCont2">
                     <div id="answer2"></div>
                 </div>
             </div>
-            <div class="function">h(x) = <div class="answerCont3">
+            <div id="functionLabel">h(x) = </div>
+            <div class="function"><div class="answerCont3">
                     <div id="answer3"></div>
                 </div>
             </div>
-            <div class="function">j(x) = <div class="answerCont4">
+            <div id="functionLabel">j(x) = </div>
+            <div class="function"><div class="answerCont4">
                     <div id="answer4"></div>
+                </div>
+            </div>
+            <div id="functionLabel">k(x) = </div>
+            <div class="function"><div class="answerCont5">
+                    <div id="answer5"></div>
+                </div>
+            </div>
+            <div id="functionLabel">l(x) = </div>
+            <div class="function"><div class="answerCont6">
+                    <div id="answer6"></div>
                 </div>
             </div>
             <div class="submitCont">

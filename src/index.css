@@ -19,7 +19,7 @@ body {
     height: 100vh;
 }
 
-#graphWindow {
+.graphWindow {
     position: absolute;
     top: 0;
     left: 0;
@@ -27,7 +27,7 @@ body {
     height: 100vh;
 }
 
-#calculatorWindow {
+.calculatorWindow {
     position: absolute;
     top: 0;
     left: 0;

@@ -33,8 +33,8 @@ var answerMathField = MQ.MathField(answerSpan, {
 let answerBox = document.getElementById("answer").firstChild.firstChild;
 answerBox.focus();
 
-let calcWindow = document.getElementById("calculatorWindow");
-let graphWindow = document.getElementById("graphWindow");
+let calcWindow = document.getElementsByClassName("calculatorWindow")[0];
+let graphWindow = document.getElementsByClassName("graphWindow")[0];
 
 let activeWindow = "calculator";
 

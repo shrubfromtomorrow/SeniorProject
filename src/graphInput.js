@@ -41,6 +41,26 @@ var answerMathField4 = MQ.MathField(answerSpan4, {
   }
 });
 
+var answerSpan5 = document.getElementById('answer5');
+var answerMathField5 = MQ.MathField(answerSpan5, {
+  handlers: {
+    edit: function () {
+      // checkAnswer(enteredMath);
+    },
+    enter: graphAll
+  }
+});
+
+var answerSpan6 = document.getElementById('answer6');
+var answerMathField6 = MQ.MathField(answerSpan6, {
+  handlers: {
+    edit: function () {
+      // checkAnswer(enteredMath);
+    },
+    enter: graphAll
+  }
+});
+
 const submitButton = document.getElementsByClassName("submitCont")[0];
 
 submitButton.addEventListener("click", function () {
@@ -62,7 +82,7 @@ document.onkeyup = function (event) {
   }
   else if (inputVisible == false && event.altKey == true && event.key == "s") {
     inputVisible = true;
-    inputWindow.style.display = "flex";
+    inputWindow.style.display = "grid";
   }
   else {
     console.log(event);
@@ -79,5 +99,9 @@ function graphAll() {
   latestGraphInput = answerMathField3.latex(); // Get entered math in LaTeX format
   drawGraph(latestGraphInput.toString(), zoomValue);
   latestGraphInput = answerMathField4.latex(); // Get entered math in LaTeX format
+  drawGraph(latestGraphInput.toString(), zoomValue);
+  latestGraphInput = answerMathField5.latex(); // Get entered math in LaTeX format
+  drawGraph(latestGraphInput.toString(), zoomValue);
+  latestGraphInput = answerMathField6.latex(); // Get entered math in LaTeX format
   drawGraph(latestGraphInput.toString(), zoomValue);
 }
