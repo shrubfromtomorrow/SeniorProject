@@ -89,19 +89,24 @@ document.onkeyup = function (event) {
   }
 }
 
+
+function checkEmpty(inputField) {
+  latestGraphInput = inputField.latex();
+  if (latestGraphInput == "") {
+    return;
+  }
+  else {
+    drawGraph(latestGraphInput.toString(), zoomValue);
+  }
+}
+
 function graphAll() {
   inputVisible = false;
   inputWindow.style.display = "none";
-  latestGraphInput = answerMathField1.latex(); // Get entered math in LaTeX format
-  drawGraph(latestGraphInput.toString(), zoomValue);
-  latestGraphInput = answerMathField2.latex(); // Get entered math in LaTeX format
-  drawGraph(latestGraphInput.toString(), zoomValue);
-  latestGraphInput = answerMathField3.latex(); // Get entered math in LaTeX format
-  drawGraph(latestGraphInput.toString(), zoomValue);
-  latestGraphInput = answerMathField4.latex(); // Get entered math in LaTeX format
-  drawGraph(latestGraphInput.toString(), zoomValue);
-  latestGraphInput = answerMathField5.latex(); // Get entered math in LaTeX format
-  drawGraph(latestGraphInput.toString(), zoomValue);
-  latestGraphInput = answerMathField6.latex(); // Get entered math in LaTeX format
-  drawGraph(latestGraphInput.toString(), zoomValue);
+  checkEmpty(answerMathField1)
+  checkEmpty(answerMathField2)
+  checkEmpty(answerMathField3)
+  checkEmpty(answerMathField4)
+  checkEmpty(answerMathField5)
+  checkEmpty(answerMathField6)
 }
