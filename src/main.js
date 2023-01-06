@@ -55,9 +55,9 @@ document.onkeydown = function (event) {
             activeWindow = "calculator"
         }
     }
-    else {
-        console.log(event);
-    }
+    // else {
+    //     console.log(event);
+    // }
 }
 
 

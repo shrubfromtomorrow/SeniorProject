@@ -43,7 +43,7 @@
   justify-content: left;
 }
 
-#functionLabel {
+.functionLabel {
   display: flex;
   align-items: center;
   justify-content: center;

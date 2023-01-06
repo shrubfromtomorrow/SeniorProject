@@ -17,8 +17,6 @@ let sizeY = canvasCont.getBoundingClientRect().height;
 // let sizeX = window.innerWidth;
 // let sizeY = window.innerHeight;
 
-console.log(sizeX);
-console.log(sizeY);
 
 canvas.style.width = sizeX + "px";
 canvas.style.height = sizeY + "px";

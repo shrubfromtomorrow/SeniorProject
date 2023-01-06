@@ -1,5 +1,11 @@
 
 
+const functionLabels = document.getElementsByClassName('functionLabel');
+
+for (let i = 0; i < 6; i++) {
+  MQ.StaticMath(functionLabels[i]);
+}
+
 var MQ = MathQuill.getInterface(2);
 var answerSpan1 = document.getElementById('answer1');
 var answerMathField1 = MQ.MathField(answerSpan1, {
@@ -79,34 +85,48 @@ document.onkeyup = function (event) {
   else if (inputVisible == true && event.altKey == true && event.key == "s") {
     inputVisible = false;
     inputWindow.style.display = "none";
+    graphAll();
   }
   else if (inputVisible == false && event.altKey == true && event.key == "s") {
     inputVisible = true;
     inputWindow.style.display = "grid";
   }
-  else {
-    console.log(event);
-  }
 }
 
 
-function checkEmpty(inputField) {
+function checkEmpty(inputField, inputNum) {
   latestGraphInput = inputField.latex();
   if (latestGraphInput == "") {
     return;
   }
   else {
-    drawGraph(latestGraphInput.toString(), zoomValue);
+    if (latestFunctions[inputNum] == latestGraphInput) {
+      console.log("juan");
+      return;
+    }
+    else {
+      drawGraph(latestGraphInput.toString(), zoomValue);
+    }
+    latestFunctions[inputNum] = latestGraphInput;
   }
+}
+
+let latestFunctions = {
+  1: "",
+  2: "",
+  3: "",
+  4: "",
+  5: "",
+  6: "",
 }
 
 function graphAll() {
   inputVisible = false;
   inputWindow.style.display = "none";
-  checkEmpty(answerMathField1)
-  checkEmpty(answerMathField2)
-  checkEmpty(answerMathField3)
-  checkEmpty(answerMathField4)
-  checkEmpty(answerMathField5)
-  checkEmpty(answerMathField6)
+  checkEmpty(answerMathField1, 1)
+  checkEmpty(answerMathField2, 2)
+  checkEmpty(answerMathField3, 3)
+  checkEmpty(answerMathField4, 4)
+  checkEmpty(answerMathField5, 5)
+  checkEmpty(answerMathField6, 6)
 }
