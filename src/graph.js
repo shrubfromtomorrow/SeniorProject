@@ -106,6 +106,26 @@ function drawGraph(formula, zoom) {
   }
 }
 
+function whiteGraph(formula, zoom) {
+  let prevPoint = [];
+  let yValue;
+  ctx.strokeStyle = "#ffffff";
+
+  ctx.lineWidth = 5;
+  for (let x = -(zoom / 2); x < (zoom / 2); x += (zoom / 5000)) {
+    fn = evaluatex(formula);
+    yValue = fn({ x });
+    yValue = yValue.toFixed(10);
+    yValue = parseFloat(yValue);
+    ctx.beginPath();
+    ctx.moveTo(prevPoint[0], prevPoint[1]);
+    ctx.lineTo((sizeX / 2) + (x * (sizeX / zoom)), (sizeY / 2) - (yValue * (sizeX / zoom)))
+    // ctx.fillRect((sizeX / 2) + (x * (sizeX / zoom)), (sizeY / 2) - (yValue * (sizeX / zoom)), 1, 1);
+    ctx.stroke();
+    prevPoint = [(sizeX / 2) + (x * (sizeX / zoom)), (sizeY / 2) - (yValue * (sizeX / zoom))];
+  }
+}
+
 function zoomOut() {
   zoomValue += 40;
   ctx.clearRect(0, 0, sizeX, sizeY);
@@ -123,6 +143,22 @@ function zoomIn() {
   drawAxes(zoomValue);
   drawNums(zoomValue);
   drawGraph(latestGraphInput.toString(), zoomValue);
+}
+
+function clearAll() {
+  // for (let i = 1; i < 7; i++) {
+  //   if (latestFunctionEdits[i] == "") {
+  //     continue;
+  //   }
+  //   else {
+  //     console.log(latestFunctionEdits[i]);
+  //     whiteGraph(latestFunctionEdits[i].toString(), 20);
+  //   }
+  // }
+  ctx.clearRect(0, 0, sizeX, sizeY);
+  drawGrid(zoomValue);
+  drawAxes(zoomValue);
+  drawNums(zoomValue);
 }
 
 const zoomOutButton = document.getElementById("zoomOut");

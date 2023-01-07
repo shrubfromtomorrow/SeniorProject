@@ -2,6 +2,8 @@
 
 const functionLabels = document.getElementsByClassName('functionLabel');
 
+let latestFunctionEdited = "answerMathField1";
+
 for (let i = 0; i < 6; i++) {
   MQ.StaticMath(functionLabels[i]);
 }
@@ -11,6 +13,7 @@ var answerSpan1 = document.getElementById('answer1');
 var answerMathField1 = MQ.MathField(answerSpan1, {
   handlers: {
     edit: function () {
+      latestFunctionEdited = "answerMathField1";
       // checkAnswer(enteredMath);
     },
     enter: graphAll
@@ -21,6 +24,7 @@ var answerSpan2 = document.getElementById('answer2');
 var answerMathField2 = MQ.MathField(answerSpan2, {
   handlers: {
     edit: function () {
+      latestFunctionEdited = "answerMathField2";
       // checkAnswer(enteredMath);
     },
     enter: graphAll
@@ -31,6 +35,7 @@ var answerSpan3 = document.getElementById('answer3');
 var answerMathField3 = MQ.MathField(answerSpan3, {
   handlers: {
     edit: function () {
+      latestFunctionEdited = "answerMathField3";
       // checkAnswer(enteredMath);
     },
     enter: graphAll
@@ -41,6 +46,7 @@ var answerSpan4 = document.getElementById('answer4');
 var answerMathField4 = MQ.MathField(answerSpan4, {
   handlers: {
     edit: function () {
+      latestFunctionEdited = "answerMathField4";
       // checkAnswer(enteredMath);
     },
     enter: graphAll
@@ -51,6 +57,7 @@ var answerSpan5 = document.getElementById('answer5');
 var answerMathField5 = MQ.MathField(answerSpan5, {
   handlers: {
     edit: function () {
+      latestFunctionEdited = "answerMathField5";
       // checkAnswer(enteredMath);
     },
     enter: graphAll
@@ -61,11 +68,14 @@ var answerSpan6 = document.getElementById('answer6');
 var answerMathField6 = MQ.MathField(answerSpan6, {
   handlers: {
     edit: function () {
+      latestFunctionEdited = "answerMathField6";
       // checkAnswer(enteredMath);
     },
     enter: graphAll
   }
 });
+
+let answerSpan1TextArea = answerSpan1.children[0].children[0];
 
 const submitButton = document.getElementsByClassName("submitCont")[0];
 
@@ -80,7 +90,7 @@ let inputVisible = false;
 
 document.onkeyup = function (event) {
   if (event.key == "`") {
-    window.location.replace("index.html");
+    clearAll();
   }
   else if (inputVisible == true && event.altKey == true && event.key == "s") {
     inputVisible = false;
@@ -90,6 +100,7 @@ document.onkeyup = function (event) {
   else if (inputVisible == false && event.altKey == true && event.key == "s") {
     inputVisible = true;
     inputWindow.style.display = "grid";
+    window[latestFunctionEdited].focus();
   }
 }
 
@@ -100,18 +111,18 @@ function checkEmpty(inputField, inputNum) {
     return;
   }
   else {
-    if (latestFunctions[inputNum] == latestGraphInput) {
+    if (latestFunctionEdits[inputNum] == latestGraphInput) {
       console.log("juan");
       return;
     }
     else {
       drawGraph(latestGraphInput.toString(), zoomValue);
     }
-    latestFunctions[inputNum] = latestGraphInput;
+    latestFunctionEdits[inputNum] = latestGraphInput;
   }
 }
 
-let latestFunctions = {
+let latestFunctionEdits = {
   1: "",
   2: "",
   3: "",
@@ -119,6 +130,7 @@ let latestFunctions = {
   5: "",
   6: "",
 }
+
 
 function graphAll() {
   inputVisible = false;

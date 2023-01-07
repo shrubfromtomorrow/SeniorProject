@@ -53,6 +53,7 @@ document.onkeydown = function (event) {
             graphWindow.style.visibility = "hidden";
             calcWindow.style.visibility = "visible";
             activeWindow = "calculator"
+            answerMathField.focus();
         }
     }
     // else {
