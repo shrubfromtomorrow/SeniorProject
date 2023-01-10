@@ -1,5 +1,11 @@
 
-console.log("Switch windows with alt+j");
+console.log("Switch windows with alt+j. Sqrt with alt+r, pi with alt+p");
+
+let replacements = {
+    "\\pi": "PI",
+}
+
+let altEvents = ["p", "r"];
 
 let latestInput = "";
 let resultDisplay = document.getElementById("result");
@@ -14,6 +20,10 @@ var answerMathField = MQ.MathField(answerSpan, {
             // checkAnswer(enteredMath);
         },
         enter: function () {
+            resultInput.textContent = latestInput;
+            if (latestInput.toString().includes("\\pi")) {
+                latestInput = latestInput.replace("\\pi", "PI");
+            }
             console.log(latestInput);
             let fn = evaluatex(latestInput.toString());
             let result = +fn().toFixed(10);
@@ -21,7 +31,6 @@ var answerMathField = MQ.MathField(answerSpan, {
                 // result = "Is that actually what you want me to calculate?";
             }
             resultDisplay.textContent = result;
-            resultInput.textContent = latestInput;
             MQ.StaticMath(resultInput);
             console.log(result);
             answerMathField.select();
@@ -56,9 +65,27 @@ document.onkeydown = function (event) {
             answerMathField.focus();
         }
     }
-    // else {
-    //     console.log(event);
-    // }
+    else if (event.key == "`") {
+        clearAll();
+    }
+    else if (altEvents.includes(event.key) && event.altKey == true) {
+        if (event.key == "p") {
+            answerMathField.cmd('\\pi');
+        }
+        else if (event.key == "r") {
+            answerMathField.cmd('\\sqrt');
+        }
+    }
+    else if (inputVisible == true && event.altKey == true && event.key == "s") {
+        inputVisible = false;
+        inputWindow.style.display = "none";
+        graphAll();
+    }
+    else if (inputVisible == false && event.altKey == true && event.key == "s") {
+        inputVisible = true;
+        inputWindow.style.display = "grid";
+        window[latestFunctionEdited].focus();
+    }
 }
 
 

@@ -88,22 +88,6 @@ submitButton.addEventListener("click", function () {
 const inputWindow = document.getElementsByClassName("functionInput")[0];
 let inputVisible = false;
 
-document.onkeyup = function (event) {
-  if (event.key == "`") {
-    clearAll();
-  }
-  else if (inputVisible == true && event.altKey == true && event.key == "s") {
-    inputVisible = false;
-    inputWindow.style.display = "none";
-    graphAll();
-  }
-  else if (inputVisible == false && event.altKey == true && event.key == "s") {
-    inputVisible = true;
-    inputWindow.style.display = "grid";
-    window[latestFunctionEdited].focus();
-  }
-}
-
 
 function checkEmpty(inputField, inputNum) {
   latestGraphInput = inputField.latex();
