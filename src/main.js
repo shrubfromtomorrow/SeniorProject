@@ -7,9 +7,15 @@ let replacements = {
 
 let altEvents = ["p", "r"];
 
+let recentResults = [];
+
+let recentInputs = [];
+
 let latestInput = "";
-let resultDisplay = document.getElementById("result");
-let resultInput = document.getElementById("resultInput");
+let latestSubmittedInput = "";
+let resultDisplays = document.getElementsByClassName("result");
+let resultsCont = document.getElementsByClassName("resultCont")[0];
+let resultInputs = document.getElementsByClassName("resultInput");
 
 var MQ = MathQuill.getInterface(2);
 var answerSpan = document.getElementById('answer');
@@ -20,7 +26,7 @@ var answerMathField = MQ.MathField(answerSpan, {
             // checkAnswer(enteredMath);
         },
         enter: function () {
-            resultInput.textContent = latestInput;
+            latestSubmittedInput = latestInput;
             if (latestInput.toString().includes("\\pi")) {
                 latestInput = latestInput.replace("\\pi", "PI");
             }
@@ -30,8 +36,15 @@ var answerMathField = MQ.MathField(answerSpan, {
             if (result == "Infinity") {
                 // result = "Is that actually what you want me to calculate?";
             }
-            resultDisplay.textContent = result;
-            MQ.StaticMath(resultInput);
+            recentResults.push(result);
+            recentInputs.push(latestInput);
+            resultsCont.appendChild(document.createElement("div")).setAttribute("class", "result");
+            resultsCont.appendChild(document.createElement("div")).setAttribute("class", "resultInput");
+            for (let i = 0; i < recentResults.length; i++) {
+                resultDisplays[i].textContent = recentResults[i];
+                resultInputs[i].textContent = recentInputs[i];
+                MQ.StaticMath(resultInputs[i]);
+            }
             console.log(result);
             answerMathField.select();
             answerMathField.keystroke("Backspace");
@@ -85,6 +98,9 @@ document.onkeydown = function (event) {
         inputVisible = true;
         inputWindow.style.display = "grid";
         window[latestFunctionEdited].focus();
+    }
+    else if (event.key == "ArrowUp" && event.altKey == true) {
+        answerMathField.write(latestSubmittedInput);
     }
 }
 

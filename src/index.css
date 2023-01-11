@@ -56,17 +56,18 @@ body {
     flex-direction: column;
     flex-grow: 1;
     display: flex;
-    justify-content: left;
+    justify-content: flex-end;
     margin: 2rem;
     margin-top: 0rem;
 }
 
-#resultInput {
+.resultInput {
     text-align: right;
+    border-bottom: solid 2px #26252D;
 }
 
-#result {
-    margin-top: auto;
+.result {
+    /* margin-top: auto; */
     padding: 2rem;
     font-family: "Helvetica";
     font-size: 2rem;
