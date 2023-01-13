@@ -34,7 +34,7 @@ var answerMathField = MQ.MathField(answerSpan, {
             let fn = evaluatex(latestInput.toString());
             let result = +fn().toFixed(10);
             if (result == "Infinity") {
-                // result = "Is that actually what you want me to calculate?";
+                result = "Why do you to calculate big numbers?";
             }
             recentResults.push(result);
             recentInputs.push(latestInput);
@@ -46,8 +46,8 @@ var answerMathField = MQ.MathField(answerSpan, {
                 MQ.StaticMath(resultInputs[i]);
             }
             console.log(result);
-            answerMathField.select();
-            answerMathField.keystroke("Backspace");
+            // answerMathField.select();
+            // answerMathField.keystroke("Backspace");
         }
     }
 });
