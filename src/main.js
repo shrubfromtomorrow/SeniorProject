@@ -1,21 +1,22 @@
 
-console.log("Switch windows with alt+j. Sqrt with alt+r, pi with alt+p");
+console.log("Switch windows with alt+j. Sqrt with alt+r, pi with alt+p. alt+up gives most recent input in regular calc. alt+s shows the graph input window. ` clears the window. alt+down clears the regular calc input.");
 
 let replacements = {
     "\\pi": "PI",
 }
 
 let altEvents = ["p", "r"];
-
 let recentResults = [];
 
 let recentInputs = [];
+let selectedInputChild = 1;
 
 let latestInput = "";
 let latestSubmittedInput = "";
 let resultDisplays = document.getElementsByClassName("result");
 let resultsCont = document.getElementsByClassName("resultCont")[0];
 let resultInputs = document.getElementsByClassName("resultInput");
+
 
 var MQ = MathQuill.getInterface(2);
 var answerSpan = document.getElementById('answer');
@@ -80,6 +81,28 @@ document.onkeydown = function (event) {
     }
     else if (event.key == "`") {
         clearAll();
+    }
+    else if (event.key == "ArrowUp" && event.ctrlKey == true) {
+        for (let i = 0; i < resultInputs.length; i++) {
+            resultInputs[i].style.border = "none";
+        }
+        resultInputs[recentInputs.length - selectedInputChild].style.border = "1px solid black";
+        if (selectedInputChild < recentInputs.length) {
+            selectedInputChild++;
+        }
+    }
+    else if (event.key == "ArrowDown" && event.ctrlKey == true) {
+        for (let i = 0; i < resultInputs.length; i++) {
+            resultInputs[i].style.border = "none";
+        }
+        resultInputs[recentInputs.length - selectedInputChild].style.border = "1px solid black";
+        if (selectedInputChild > 0) {
+            selectedInputChild--;
+        }
+    }
+    else if (event.key == "ArrowDown" && event.altKey == true) {
+        answerMathField.select();
+        answerMathField.keystroke("Backspace");
     }
     else if (altEvents.includes(event.key) && event.altKey == true) {
         if (event.key == "p") {
