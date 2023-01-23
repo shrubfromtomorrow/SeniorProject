@@ -9,12 +9,13 @@ let altEvents = ["p", "r"];
 let recentResults = [];
 
 let recentInputs = [];
-let selectedInputChild = 1;
+let selectedInputChild = 0;
 
 let latestInput = "";
 let latestSubmittedInput = "";
 let resultDisplays = document.getElementsByClassName("result");
-let resultsCont = document.getElementsByClassName("resultCont")[0];
+let resultCont = document.getElementsByClassName("resultCont")[0];
+let resultContChildren = resultCont.children;
 let resultInputs = document.getElementsByClassName("resultInput");
 
 
@@ -39,8 +40,8 @@ var answerMathField = MQ.MathField(answerSpan, {
             }
             recentResults.push(result);
             recentInputs.push(latestInput);
-            resultsCont.appendChild(document.createElement("div")).setAttribute("class", "result");
-            resultsCont.appendChild(document.createElement("div")).setAttribute("class", "resultInput");
+            resultCont.appendChild(document.createElement("div")).setAttribute("class", "result");
+            resultCont.appendChild(document.createElement("div")).setAttribute("class", "resultInput");
             for (let i = 0; i < recentResults.length; i++) {
                 resultDisplays[i].textContent = recentResults[i];
                 resultInputs[i].textContent = recentInputs[i];
@@ -83,22 +84,33 @@ document.onkeydown = function (event) {
         clearAll();
     }
     else if (event.key == "ArrowUp" && event.ctrlKey == true) {
-        for (let i = 0; i < resultInputs.length; i++) {
-            resultInputs[i].style.border = "none";
+        for (let i = 0; i < resultContChildren.length; i++) {
+            resultContChildren[i].style.border = "none";
         }
-        resultInputs[recentInputs.length - selectedInputChild].style.border = "1px solid black";
-        if (selectedInputChild < recentInputs.length) {
+        if (selectedInputChild < resultContChildren.length) {
             selectedInputChild++;
         }
+        resultContChildren[(recentInputs.length * 2) - selectedInputChild].style.border = "1px solid black";
     }
+
+    //TODO: Readd border top to displayed inputs after border style wipe. Actually allow enter to paste hovered input.
+
     else if (event.key == "ArrowDown" && event.ctrlKey == true) {
-        for (let i = 0; i < resultInputs.length; i++) {
-            resultInputs[i].style.border = "none";
+        for (let i = 0; i < resultContChildren.length; i++) {
+            resultContChildren[i].style.border = "none";
         }
-        resultInputs[recentInputs.length - selectedInputChild].style.border = "1px solid black";
-        if (selectedInputChild > 0) {
+        if (selectedInputChild > 1) {
             selectedInputChild--;
+            resultContChildren[(recentInputs.length * 2) - selectedInputChild].style.border = "1px solid black";
         }
+        else if (selectedInputChild == 1) {
+            for (let i = 0; i < resultContChildren.length; i++) {
+                resultContChildren[i].style.border = "none";
+            }
+            selectedInputChild = 0;
+            answerMathField.focus();
+        }
+
     }
     else if (event.key == "ArrowDown" && event.altKey == true) {
         answerMathField.select();
