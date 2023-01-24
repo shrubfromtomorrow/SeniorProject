@@ -4,7 +4,7 @@ console.log("Switch windows with alt+j, show input window with alt+s");
 const canvas = document.getElementsByClassName('canvas')[0];
 const canvasCont = document.getElementsByClassName("canvasCont")[0];
 let latestGraphInput = "";
-let zoomValue = 20;
+let zoomValue = 20.0;
 
 
 let ctx = canvas.getContext('2d');
@@ -89,20 +89,34 @@ function drawGraph(formula, zoom) {
   }
   ctx.strokeStyle = colors[Math.floor(Math.random() * colors.length)];
   poppedColors.push(ctx.strokeStyle);
-  colors = colors.filter(function (e) { return e !== ctx.strokeStyle })
+  colors = colors.filter(function (e) { return e !== ctx.strokeStyle });
 
   ctx.lineWidth = 2;
+  let outOfRange = false;
   for (let x = -(zoom / 2); x < (zoom / 2); x += (zoom / 5000)) {
     fn = evaluatex(formula);
     yValue = fn({ x });
     yValue = yValue.toFixed(10);
     yValue = parseFloat(yValue);
-    ctx.beginPath();
-    ctx.moveTo(prevPoint[0], prevPoint[1]);
-    ctx.lineTo((sizeX / 2) + (x * (sizeX / zoom)), (sizeY / 2) - (yValue * (sizeX / zoom)))
-    // ctx.fillRect((sizeX / 2) + (x * (sizeX / zoom)), (sizeY / 2) - (yValue * (sizeX / zoom)), 1, 1);
-    ctx.stroke();
-    prevPoint = [(sizeX / 2) + (x * (sizeX / zoom)), (sizeY / 2) - (yValue * (sizeX / zoom))];
+
+    if (yValue > zoomValue || yValue < -1.0 * zoomValue) {
+      outOfRange = true;
+    }
+    else {
+      if (outOfRange == true) {
+        prevPoint = [(sizeX / 2) + (x * (sizeX / zoom)), (sizeY / 2) - (yValue * (sizeX / zoom))];
+      }
+      else {
+
+        ctx.beginPath();
+        ctx.moveTo(prevPoint[0], prevPoint[1]);
+        ctx.lineTo((sizeX / 2) + (x * (sizeX / zoom)), (sizeY / 2) - (yValue * (sizeX / zoom)));
+        // ctx.fillRect((sizeX / 2) + (x * (sizeX / zoom)), (sizeY / 2) - (yValue * (sizeX / zoom)), 1, 1);
+        ctx.stroke();
+      }
+      outOfRange = false;
+      prevPoint = [(sizeX / 2) + (x * (sizeX / zoom)), (sizeY / 2) - (yValue * (sizeX / zoom))];
+    }
   }
 }
 
