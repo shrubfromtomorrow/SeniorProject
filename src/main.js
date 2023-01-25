@@ -18,6 +18,8 @@ let resultCont = document.getElementsByClassName("resultCont")[0];
 let resultContChildren = resultCont.children;
 let resultInputs = document.getElementsByClassName("resultInput");
 
+let historyMode = false;
+
 
 var MQ = MathQuill.getInterface(2);
 var answerSpan = document.getElementById('answer');
@@ -25,31 +27,44 @@ var answerMathField = MQ.MathField(answerSpan, {
     handlers: {
         edit: function () {
             latestInput = answerMathField.latex(); // Get entered math in LaTeX format
-            // checkAnswer(enteredMath);
         },
         enter: function () {
-            latestSubmittedInput = latestInput;
-            if (latestInput.toString().includes("\\pi")) {
-                latestInput = latestInput.replace("\\pi", "PI");
+            if (historyMode) {
+                answerMathField.select();
+                answerMathField.keystroke("Backspace");
+                if (resultContChildren[(recentInputs.length * 2) - selectedInputChild].className == "resultInput mq-math-mode") {
+                    answerMathField.write(MQ.StaticMath(resultContChildren[(recentInputs.length * 2) - selectedInputChild]).latex());
+                }
+                else {
+                    answerMathField.write(resultContChildren[(recentInputs.length * 2) - selectedInputChild].textContent);
+                }
             }
-            console.log(latestInput);
-            let fn = evaluatex(latestInput.toString());
-            let result = +fn().toFixed(10);
-            if (result == "Infinity") {
-                result = "Why do you to calculate big numbers?";
+            else {
+                latestSubmittedInput = latestInput;
+                if (latestInput.toString().includes("\\pi")) {
+                    latestInput = latestInput.replaceAll("\\pi", "PI");
+                }
+                console.log(latestInput);
+                let fn = evaluatex(latestInput.toString());
+                let result = +fn().toFixed(10);
+                if (result == "Infinity") {
+                    result = "Why do you to calculate big numbers?";
+                }
+                recentResults.push(result);
+                recentInputs.push(latestSubmittedInput);
+                resultCont.appendChild(document.createElement("div")).setAttribute("class", "result");
+                resultCont.appendChild(document.createElement("div")).setAttribute("class", "resultInput");
+                for (let i = 0; i < recentResults.length; i++) {
+                    resultDisplays[i].textContent = recentResults[i];
+                    resultInputs[i].textContent = recentInputs[i];
+
+                    // LATEST SUBMITTED INPUTS
+                    MQ.StaticMath(resultInputs[i]);
+                }
+                console.log(result);
+                // answerMathField.select();
+                // answerMathField.keystroke("Backspace");
             }
-            recentResults.push(result);
-            recentInputs.push(latestInput);
-            resultCont.appendChild(document.createElement("div")).setAttribute("class", "result");
-            resultCont.appendChild(document.createElement("div")).setAttribute("class", "resultInput");
-            for (let i = 0; i < recentResults.length; i++) {
-                resultDisplays[i].textContent = recentResults[i];
-                resultInputs[i].textContent = recentInputs[i];
-                MQ.StaticMath(resultInputs[i]);
-            }
-            console.log(result);
-            // answerMathField.select();
-            // answerMathField.keystroke("Backspace");
         }
     }
 });
@@ -85,30 +100,33 @@ document.onkeydown = function (event) {
     }
     else if (event.key == "ArrowUp" && event.ctrlKey == true) {
         for (let i = 0; i < resultContChildren.length; i++) {
-            resultContChildren[i].style.border = "none";
+            resultContChildren[i].style.color = "black";
         }
         if (selectedInputChild < resultContChildren.length) {
+            historyMode = true;
             selectedInputChild++;
         }
-        resultContChildren[(recentInputs.length * 2) - selectedInputChild].style.border = "1px solid black";
+        resultContChildren[(recentInputs.length * 2) - selectedInputChild].style.color = "red";
     }
 
     //TODO: Readd border top to displayed inputs after border style wipe. Actually allow enter to paste hovered input.
 
     else if (event.key == "ArrowDown" && event.ctrlKey == true) {
         for (let i = 0; i < resultContChildren.length; i++) {
-            resultContChildren[i].style.border = "none";
+            resultContChildren[i].style.color = "black";
         }
         if (selectedInputChild > 1) {
+            historyMode = true;
             selectedInputChild--;
-            resultContChildren[(recentInputs.length * 2) - selectedInputChild].style.border = "1px solid black";
+            resultContChildren[(recentInputs.length * 2) - selectedInputChild].style.color = "red";
         }
         else if (selectedInputChild == 1) {
             for (let i = 0; i < resultContChildren.length; i++) {
-                resultContChildren[i].style.border = "none";
+                resultContChildren[i].style.color = "black";
             }
             selectedInputChild = 0;
             answerMathField.focus();
+            historyMode = false;
         }
 
     }
