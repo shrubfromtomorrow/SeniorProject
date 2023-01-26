@@ -5,6 +5,8 @@ let replacements = {
     "\\pi": "PI",
 }
 
+let activeElement = answerMathField;
+
 let altEvents = ["p", "r"];
 let recentResults = [];
 
@@ -17,6 +19,7 @@ let resultDisplays = document.getElementsByClassName("result");
 let resultCont = document.getElementsByClassName("resultCont")[0];
 let resultContChildren = resultCont.children;
 let resultInputs = document.getElementsByClassName("resultInput");
+
 
 let historyMode = false;
 
@@ -74,8 +77,8 @@ answerBox.focus();
 
 let calcWindow = document.getElementsByClassName("calculatorWindow")[0];
 let graphWindow = document.getElementsByClassName("graphWindow")[0];
-
 let activeWindow = "calculator";
+
 
 document.onkeydown = function (event) {
     answerBox.focus();
@@ -86,7 +89,7 @@ document.onkeydown = function (event) {
         if (activeWindow == "calculator") {
             calcWindow.style.visibility = "hidden";
             graphWindow.style.visibility = "visible";
-            activeWindow = "graph"
+            activeWindow = "graph";
         }
         else if (activeWindow == "graph") {
             graphWindow.style.visibility = "hidden";
@@ -136,10 +139,22 @@ document.onkeydown = function (event) {
     }
     else if (altEvents.includes(event.key) && event.altKey == true) {
         if (event.key == "p") {
-            answerMathField.cmd('\\pi');
+            if (activeWindow == "calculator") {
+                answerMathField.cmd('\\pi');
+            }
+            else if (activeWindow == "graph") {
+                // console.log("answerMathField" + document.activeElement.parentElement.parentElement.id.slice(-1));
+                window["answerMathField" + document.activeElement.parentElement.parentElement.id.slice(-1)].cmd('\\pi');
+            }
         }
         else if (event.key == "r") {
-            answerMathField.cmd('\\sqrt');
+            if (activeWindow == "calculator") {
+                answerMathField.cmd('\\sqrt');
+            }
+            else if (activeWindow == "graph") {
+                // console.log("answerMathField" + document.activeElement.parentElement.parentElement.id.slice(-1));
+                window["answerMathField" + document.activeElement.parentElement.parentElement.id.slice(-1)].cmd('\\sqrt');
+            }
         }
     }
     else if (inputVisible == true && event.altKey == true && event.key == "s") {

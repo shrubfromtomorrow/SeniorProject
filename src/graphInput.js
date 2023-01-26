@@ -4,6 +4,8 @@ const functionLabels = document.getElementsByClassName('functionLabel');
 
 let latestFunctionEdited = "answerMathField1";
 
+
+
 for (let i = 0; i < 6; i++) {
   MQ.StaticMath(functionLabels[i]);
 }
