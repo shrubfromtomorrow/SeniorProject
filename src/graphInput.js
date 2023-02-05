@@ -79,26 +79,23 @@ var answerMathField6 = MQ.MathField(answerSpan6, {
 
 let answerSpan1TextArea = answerSpan1.children[0].children[0];
 
-const submitButton = document.getElementsByClassName("submitCont")[0];
-
-submitButton.addEventListener("click", function () {
-  inputVisible = false;
-  inputWindow.style.display = "none";
-  graphAll();
-});
-
 const inputWindow = document.getElementsByClassName("functionInput")[0];
 let inputVisible = false;
 
 
 function checkEmpty(inputField, inputNum) {
+  console.log(inputField);
+  if (inputField.toString().includes("\\e")) {
+    inputField = inputField.replaceAll("\\e", "E");
+  }
   latestGraphInput = inputField.latex();
   if (latestGraphInput == "") {
     return;
   }
   else {
+    console.log(latestGraphInput);
+
     if (latestFunctionEdits[inputNum] == latestGraphInput) {
-      console.log("juan");
       return;
     }
     else {

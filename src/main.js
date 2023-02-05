@@ -7,7 +7,7 @@ let replacements = {
 
 let activeElement = answerMathField;
 
-let altEvents = ["p", "r"];
+let altEvents = ["p", "r", "e"];
 let recentResults = [];
 
 let recentInputs = [];
@@ -46,6 +46,10 @@ var answerMathField = MQ.MathField(answerSpan, {
                 latestSubmittedInput = latestInput;
                 if (latestInput.toString().includes("\\pi")) {
                     latestInput = latestInput.replaceAll("\\pi", "PI");
+                }
+                // Cannot replace every single e
+                if (latestInput.toString().includes("e")) {
+                    latestInput = latestInput.replaceAll("e", "E");
                 }
                 console.log(latestInput);
                 let fn = evaluatex(latestInput.toString());
@@ -154,6 +158,15 @@ document.onkeydown = function (event) {
             else if (activeWindow == "graph") {
                 // console.log("answerMathField" + document.activeElement.parentElement.parentElement.id.slice(-1));
                 window["answerMathField" + document.activeElement.parentElement.parentElement.id.slice(-1)].cmd('\\sqrt');
+            }
+        }
+        else if (event.key == "e") {
+            if (activeWindow == "calculator") {
+                answerMathField.cmd('e');
+            }
+            else if (activeWindow == "graph") {
+                // console.log("answerMathField" + document.activeElement.parentElement.parentElement.id.slice(-1));
+                window["answerMathField" + document.activeElement.parentElement.parentElement.id.slice(-1)].cmd('e');
             }
         }
     }

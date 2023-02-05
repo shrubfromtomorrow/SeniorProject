@@ -44,9 +44,9 @@ function drawNums(zoom) {
 
   for (let x = -(zoom / 2); x <= (zoom / 2); x++) {
     if (x % (zoom / 20) == 0) {
-      ctx.fillStyle = "white";
+      ctx.fillStyle = "#24273a";
       ctx.fillRect(((x) * (sizeX / zoom)) + (sizeX / 2) - 8, sizeY / 2 + 1, 15, 15);
-      ctx.fillStyle = "black";
+      ctx.fillStyle = "#cad3f5";
       ctx.fillText(x.toString(), ((x) * (sizeX / zoom)) + (sizeX / 2), sizeY / 2 + 13);
     }
   }
@@ -54,7 +54,7 @@ function drawNums(zoom) {
 
 function drawGrid(segNum) {
   for (let x = -(segNum / 2); x <= (segNum / 2); x++) {
-    if (x % (segNum / 20) == 0) {
+    if (x % (segNum / zoomValue) == 0) {
       ctx.strokeStyle = "black";
       ctx.lineWidth = 1;
       ctx.beginPath();
@@ -64,7 +64,7 @@ function drawGrid(segNum) {
     }
   }
   for (let y = -(segNum / 2); y < (segNum / 2); y++) {
-    if (y % (segNum / 20) == 0) {
+    if (y % (segNum / zoomValue) == 0) {
       ctx.strokeStyle = "black";
       ctx.lineWidth = 1;
       ctx.beginPath();
@@ -94,6 +94,12 @@ function drawGraph(formula, zoom) {
   ctx.lineWidth = 2;
   let outOfRange = false;
   for (let x = -(zoom / 2); x < (zoom / 2); x += (zoom / 5000)) {
+    if (formula.toString().includes("\\pi")) {
+      formula = formula.replaceAll("\\pi", "PI");
+    }
+    // if (formula.toString().includes("e")) {
+    //   formula = formula.replaceAll("e", "E");
+    // }
     fn = evaluatex(formula);
     yValue = fn({ x });
     yValue = yValue.toFixed(10);
