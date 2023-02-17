@@ -170,12 +170,12 @@ document.onkeydown = function (event) {
             }
         }
     }
-    else if (inputVisible == true && event.altKey == true && event.key == "s") {
+    else if (inputVisible == true && event.altKey == true && event.key == "s" && activeWindow != "calculator") {
         inputVisible = false;
         inputWindow.style.display = "none";
         graphAll();
     }
-    else if (inputVisible == false && event.altKey == true && event.key == "s") {
+    else if (inputVisible == false && event.altKey == true && event.key == "s" && activeWindow != "calculator") {
         inputVisible = true;
         inputWindow.style.display = "grid";
         window[latestFunctionEdited].focus();

@@ -19,6 +19,7 @@ const createWindow = () => {
       devTools: true,
     },
     show: true,
+    fullscreen: true,
   });
 
   // and load the index.html of the app.

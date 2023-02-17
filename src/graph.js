@@ -44,9 +44,9 @@ function drawNums(zoom) {
 
   for (let x = -(zoom / 2); x <= (zoom / 2); x++) {
     if (x % (zoom / 20) == 0) {
-      ctx.fillStyle = "#24273a";
+      ctx.fillStyle = "#eff1f5";
       ctx.fillRect(((x) * (sizeX / zoom)) + (sizeX / 2) - 8, sizeY / 2 + 1, 15, 15);
-      ctx.fillStyle = "#cad3f5";
+      ctx.fillStyle = "#4c4f69";
       ctx.fillText(x.toString(), ((x) * (sizeX / zoom)) + (sizeX / 2), sizeY / 2 + 13);
     }
   }
@@ -75,7 +75,7 @@ function drawGrid(segNum) {
   }
 }
 
-let colors = ["#ff0000", "#0000ff", "#008000", "#800080"];
+let colors = ["#1e66f5", "#d20f39", "#ea76cb", "#40a02b", "#04a5e5"];
 let poppedColors = [];
 
 function drawGraph(formula, zoom) {
@@ -93,7 +93,7 @@ function drawGraph(formula, zoom) {
 
   ctx.lineWidth = 2;
   let outOfRange = false;
-  for (let x = -(zoom / 2); x < (zoom / 2); x += (zoom / 5000)) {
+  for (let x = -(zoom / 2); x < (zoom / 2); x += (zoom / canvas.width)) {
     if (formula.toString().includes("\\pi")) {
       formula = formula.replaceAll("\\pi", "PI");
     }

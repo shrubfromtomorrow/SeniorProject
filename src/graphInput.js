@@ -84,7 +84,6 @@ let inputVisible = false;
 
 
 function checkEmpty(inputField, inputNum) {
-  console.log(inputField);
   if (inputField.toString().includes("\\e")) {
     inputField = inputField.replaceAll("\\e", "E");
   }

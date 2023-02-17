@@ -17,16 +17,17 @@
     --sky: #04a5e5;
 
     /* Dark */
-    --base: #24273a;
+    /* --base: #24273a;
     --foreground: #cad3f5;
     --blue: #8aadf4;
     --red: #ed8796;
     --pink: #f5bde6;
     --purple: #c6a0f6;
     --green: #a6da95;
-    --sky: #91d7e3;
-    
+    --sky: #91d7e3; */   
 }
+
+
 
 html {
     line-height: 1;

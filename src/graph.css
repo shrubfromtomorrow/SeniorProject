@@ -12,24 +12,24 @@
 
 :root {
   /* Light */
-  /*--base: #eff1f5;
+  --base: #eff1f5;
   --foreground: #4c4f69;
   --blue: #1e66f5;
   --red: #d20f39;
   --pink: #ea76cb;
   --purple: #8839ef;
   --green: #40a02b;
-  --sky: #04a5e5; */
+  --sky: #04a5e5;
 
   /* Dark */
-  --base: #24273a;
+  /* --base: #24273a;
   --foreground: #cad3f5;
   --blue: #8aadf4;
   --red: #ed8796;
   --pink: #f5bde6;
   --purple: #c6a0f6;
   --green: #a6da95;
-  --sky: #91d7e3;
+  --sky: #91d7e3; */
 }
 
 .canvasCont {
