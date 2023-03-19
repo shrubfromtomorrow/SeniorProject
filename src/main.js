@@ -7,7 +7,8 @@ let replacements = {
 
 let activeElement = answerMathField;
 
-let altEvents = ["p", "r", "e"];
+//               pi   sqrt sin  cos  tan  beg  end
+let altEvents = ["p", "r", "i", "o", "l", "b", "g"];
 let recentResults = [];
 
 let recentInputs = [];
@@ -48,9 +49,9 @@ var answerMathField = MQ.MathField(answerSpan, {
                     latestInput = latestInput.replaceAll("\\pi", "PI");
                 }
                 // Cannot replace every single e
-                if (latestInput.toString().includes("e")) {
-                    latestInput = latestInput.replaceAll("e", "E");
-                }
+                // if (latestInput.toString().includes("e")) {
+                //     latestInput = latestInput.replaceAll("e", "E");
+                // }
                 console.log(latestInput);
                 let fn = evaluatex(latestInput.toString());
                 let result = +fn().toFixed(10);
@@ -142,32 +143,69 @@ document.onkeydown = function (event) {
         answerMathField.keystroke("Backspace");
     }
     else if (altEvents.includes(event.key) && event.altKey == true) {
-        if (event.key == "p") {
-            if (activeWindow == "calculator") {
-                answerMathField.cmd('\\pi');
-            }
-            else if (activeWindow == "graph") {
-                // console.log("answerMathField" + document.activeElement.parentElement.parentElement.id.slice(-1));
-                window["answerMathField" + document.activeElement.parentElement.parentElement.id.slice(-1)].cmd('\\pi');
-            }
-        }
-        else if (event.key == "r") {
-            if (activeWindow == "calculator") {
-                answerMathField.cmd('\\sqrt');
-            }
-            else if (activeWindow == "graph") {
-                // console.log("answerMathField" + document.activeElement.parentElement.parentElement.id.slice(-1));
-                window["answerMathField" + document.activeElement.parentElement.parentElement.id.slice(-1)].cmd('\\sqrt');
-            }
-        }
-        else if (event.key == "e") {
-            if (activeWindow == "calculator") {
-                answerMathField.cmd('e');
-            }
-            else if (activeWindow == "graph") {
-                // console.log("answerMathField" + document.activeElement.parentElement.parentElement.id.slice(-1));
-                window["answerMathField" + document.activeElement.parentElement.parentElement.id.slice(-1)].cmd('e');
-            }
+        switch(event.key) {
+            case "p":
+                if (activeWindow == "calculator") {
+                    answerMathField.cmd('\\pi');
+                }
+                else if (activeWindow == "graph") {
+                    window["answerMathField" + document.activeElement.parentElement.parentElement.id.slice(-1)].cmd('\\pi');
+                }
+                break;
+            case "r":
+                if (activeWindow == "calculator") {
+                    answerMathField.cmd('\\sqrt');
+                }
+                else if (activeWindow == "graph") {
+                    window["answerMathField" + document.activeElement.parentElement.parentElement.id.slice(-1)].cmd('\\sqrt');
+                }
+                break;
+            case "i":
+                if (activeWindow == "calculator") {
+                    answerMathField.typedText('sin()');
+                    answerMathField.keystroke("Left");
+                }
+                else if (activeWindow == "graph") {
+                    window["answerMathField" + document.activeElement.parentElement.parentElement.id.slice(-1)].typedText('sin()');
+                    window["answerMathField" + document.activeElement.parentElement.parentElement.id.slice(-1)].keystroke("Left");
+                }
+                break;
+            case "o":
+                if (activeWindow == "calculator") {
+                    answerMathField.typedText('cos()');
+                    answerMathField.keystroke("Left");
+                }
+                else if (activeWindow == "graph") {
+                    window["answerMathField" + document.activeElement.parentElement.parentElement.id.slice(-1)].typedText('cos()');
+                    window["answerMathField" + document.activeElement.parentElement.parentElement.id.slice(-1)].keystroke("Left");
+                }
+                break;
+            case "l":
+                if (activeWindow == "calculator") {
+                    answerMathField.typedText('tan()');
+                    answerMathField.keystroke("Left");
+                }
+                else if (activeWindow == "graph") {
+                    window["answerMathField" + document.activeElement.parentElement.parentElement.id.slice(-1)].typedText('tan()');
+                    window["answerMathField" + document.activeElement.parentElement.parentElement.id.slice(-1)].keystroke("Left");
+                }
+                break;
+            case "b":
+                if (activeWindow == "calculator") {
+                    answerMathField.moveToLeftEnd();
+                }
+                else if (activeWindow == "graph") {
+                    window["answerMathField" + document.activeElement.parentElement.parentElement.id.slice(-1)].moveToLeftEnd();
+                }
+                break;
+            case "g":
+                if (activeWindow == "calculator") {
+                    answerMathField.moveToRightEnd();
+                }
+                else if (activeWindow == "graph") {
+                    window["answerMathField" + document.activeElement.parentElement.parentElement.id.slice(-1)].moveToRightEnd();
+                }
+                break;
         }
     }
     else if (inputVisible == true && event.altKey == true && event.key == "s" && activeWindow != "calculator") {
