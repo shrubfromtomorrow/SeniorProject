@@ -3,6 +3,8 @@
 
 Clone this repo and open the index.html file in your browser. Exact steps at the bottom.
 
+Older commits have a spelling error in the evaluatex reference at the bottom of the html pages, it is spelled "evalulatex" instead of "evaluatex".
+
 ## Binds
 
 ### If something breaks, just use ctrl+r
