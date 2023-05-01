@@ -14,10 +14,6 @@ ctx.imageSmoothingEnabled = false;
 let sizeX = canvasCont.getBoundingClientRect().width;
 let sizeY = canvasCont.getBoundingClientRect().height;
 
-// let sizeX = window.innerWidth;
-// let sizeY = window.innerHeight;
-
-
 canvas.style.width = sizeX + "px";
 canvas.style.height = sizeY + "px";
 // Set actual size in memory (scaled to account for extra pixel density).

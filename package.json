@@ -50,7 +50,8 @@
     "evaluatex": "^2.2.0",
     "ipc": "^0.0.1",
     "jquery": "^3.6.1",
-    "mathquill": "^0.10.1-a"
+    "mathquill": "^0.10.1-a",
+    "tex-math-parser": "^2.0.4"
   },
   "devDependencies": {
     "@electron-forge/cli": "^6.0.4",
@@ -58,6 +59,7 @@
     "@electron-forge/maker-rpm": "^6.0.4",
     "@electron-forge/maker-squirrel": "^6.0.4",
     "@electron-forge/maker-zip": "^6.0.4",
-    "electron": "20.0.1"
+    "electron": "20.0.1",
+    "webpack-cli": "^5.0.1"
   }
 }

@@ -46,7 +46,7 @@ var answerMathField = MQ.MathField(answerSpan, {
             else {
                 latestSubmittedInput = latestInput;
                 if (latestInput.toString().includes("\\pi")) {
-                    latestInput = latestInput.replaceAll("\\pi", "PI");
+                    latestInput = latestInput.replaceAll("\\pi", " PI");
                 }
                 // Cannot replace every single e
                 // if (latestInput.toString().includes("e")) {
@@ -54,6 +54,7 @@ var answerMathField = MQ.MathField(answerSpan, {
                 // }
                 console.log(latestInput);
                 let fn = evaluatex(latestInput.toString());
+
                 let result = +fn().toFixed(10);
                 if (result == "Infinity") {
                     result = "Why do you to calculate big numbers?";
