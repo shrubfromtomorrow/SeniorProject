@@ -2,7 +2,7 @@
   "name": "calcgui",
   "productName": "calcgui",
   "version": "1.0.0",
-  "description": "My Electron application description",
+  "description": "A graphing calculator built in Electron",
   "main": "src/index.js",
   "scripts": {
     "start": "electron-forge start",
@@ -16,7 +16,7 @@
     "name": "shrubfromtomorrow",
     "email": "orionjandrews@gmail.com"
   },
-  "license": "MIT",
+  "license": "GPL",
   "config": {
     "forge": {
       "packagerConfig": {},
@@ -45,13 +45,11 @@
     }
   },
   "dependencies": {
-    "desmos": "^1.5.4",
     "electron-squirrel-startup": "^1.0.0",
     "evaluatex": "^2.2.0",
     "ipc": "^0.0.1",
     "jquery": "^3.6.1",
-    "mathquill": "^0.10.1-a",
-    "tex-math-parser": "^2.0.4"
+    "mathquill": "^0.10.1-a"
   },
   "devDependencies": {
     "@electron-forge/cli": "^6.0.4",
